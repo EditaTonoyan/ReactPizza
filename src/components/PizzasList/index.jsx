@@ -33,6 +33,7 @@ color: #000000;
 const Container = styled.div`
 // width: 280px;
 height: 85px;
+margin-bottom: 12px;
 left: 112px;
 top: 690px;
 background: #F3F3F3;

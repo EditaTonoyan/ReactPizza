@@ -26,6 +26,7 @@
     text-align: center;
   }
   .gallery img {
+    margin-top: 20px;
     width: 260px;
     height: 260px;
     left: 1072px;
