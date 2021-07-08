@@ -35,6 +35,8 @@
 
   
   .gallery .gallery_item {
+    display: flex;
+    flex-direction: column;
     transition: grid-row-start 300ms linear;
     transition: transform 300ms ease;
     transition: all 0.5s ease;
@@ -44,7 +46,7 @@
 
   .paragraph {
     font-family: Proxima Nova;
-    font-style: normal;
+    /* font-style: normal; */
     font-weight: bold;
     font-size: 14px;
     line-height: 17px;
@@ -54,9 +56,10 @@
     
   }
   
-  input[type="checkbox"] {
+  input[type="radio"] {
     opacity: 0;
   }
+
 /******/
 
 
@@ -65,7 +68,9 @@
   background-color: white;
   cursor: pointer;
   display: inline-block;
-  height: 20px;
-  width: 100px;
+  /* height: 20px; */
+  padding: 7px;
+  border-radius: 5px;
+  width: auto;
 }
 
