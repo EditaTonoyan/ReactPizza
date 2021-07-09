@@ -14,23 +14,22 @@ import styled from 'styled-components';
 //     }
 // ]
 const Menu = () => {
-
+    // styler@ componentic durs sarqi ete shat en arandznacnum es arandzin styles.js fayli
     const Button = styled.button`
         width: 120px;
         height: 50px;
         border-radius: 30px;
         border: 0px;
-        margin-left:15px;
+        margin-left: 15px;
     `;
 
     const Div = styled.div`
-        margin-left:250px;
-        margin-top:20px;
+        margin-left: 250px;
+        margin-top: 20px;
     `;
 
     return (
         <Div>
-
             {/* {
                 navlinks.map((navlink, index) => {
                     return (
@@ -50,7 +49,6 @@ const Menu = () => {
                 })
             } */}
 
-
             <Button>Все</Button>
             <Button>Мясные</Button>
             <Button>Вегетарианская</Button>
@@ -58,6 +56,6 @@ const Menu = () => {
             <Button>Острые</Button>
             <Button>Закрытие</Button>
         </Div>
-    )
-}
-export default Menu
+    );
+};
+export default Menu;
