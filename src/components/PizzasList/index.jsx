@@ -1,6 +1,6 @@
 import styles from './list.module.css';
 import styled from 'styled-components';
-import { useState } from 'react';
+import { connect } from 'react-redux';
 
 const Par = styled.p`
 font-family: Proxima Nova;
@@ -23,8 +23,6 @@ font-style: normal;
 font-weight: bold;
 font-size: 22px;
 line-height: 27px;
-/* identical to box height */
-
 letter-spacing: 0.015em;
 
 color: #000000;
@@ -39,12 +37,32 @@ top: 690px;
 background: #F3F3F3;
 border-radius: 10px;
 `;
-const Add = styled.button`
+const AddButton = styled.button`
+width: 118px;
+height: 5px;
+left: 274px;
+top: 803px;
+
+font-family: Proxima Nova;
+font-style: normal;
+font-weight: bold;
+font-size: 16px;
+line-height: 19px;
 width: 132px;
 height: 40px;
 left: 260px;
 top: 1316px;
 background: #FFFFFF;
+border: 1px solid #EB5A1E;
+box-sizing: border-box;
+border-radius: 30px;
+`;
+const AddButton1 = styled(AddButton)`
+width: 132px;
+height: 40px;
+left: 260px;
+top: 1316px;
+background: #FE5F1E;
 border: 1px solid #EB5A1E;
 box-sizing: border-box;
 border-radius: 30px;
@@ -55,35 +73,19 @@ display: flex;
 justify-content: space-around;
 `;
 
-const Text = styled.span`
-width: 77px;
-height: 15px;
-left: 297px;
-top: 1327px;
-font-family: Proxima Nova;
-font-style: normal;
-font-weight: bold;
-font-size: 16px;
-line-height: 19px;
-color: #EB5A1E;
-`;
+
 const PizzasList = (props) => {
-
-    console.log(props.images);
-    const [slim, setSlim] = useState({});
-    const [size, setSize] = useState({});
-
-    const onChange = (e) => {
-        const id = e.target.name.includes('slim_') ?
-            e.target.name.replace('slim_', ' ') :
-            e.target.name.replace('size_', ' ');
-        slim[id] = e.target.value;
-        size[id] = e.target.value;
-    }
+    const {
+        addToChart,
+        onChange,
+        count
+    } = props
+    console.log(count);
 
     return (
         <div className={styles.gallery} id="gallery">
             {props.images.length ? props.images.map((img) => {
+
 
                 return (
                     <div key={img.id} className={styles.gallery_item}>
@@ -97,13 +99,12 @@ const PizzasList = (props) => {
 
                         </div>
                         <Container>
-                            <div>
-                                <label onChange={onChange} className={styles.paragraph}  >
+                            <div onChange={(e) => { onChange(e.target) }}>
+                                <label className={styles.paragraph}  >
                                     <input
                                         name={`slim_${img.id}`}
                                         type='radio'
                                         value="1"
-                                        onChange={onChange}
                                     />
                                     <span>Тонкое</span>
 
@@ -113,20 +114,18 @@ const PizzasList = (props) => {
                                         name={`slim_${img.id}`}
                                         type='radio'
                                         value="2"
-                                        onChange={onChange}
                                     />
                                     <span>Традиционное</span>
                                 </label>
                             </div>
 
 
-                            <div>
+                            <div onChange={(e) => { onChange(e.target) }}>
                                 <label className={styles.paragraph} >
                                     <input
                                         name={`size_${img.id}`}
                                         type='radio'
                                         value="3"
-                                        onChange={onChange}
                                     />
                                     <span>26 см.</span>
                                 </label>
@@ -135,28 +134,49 @@ const PizzasList = (props) => {
                                         name={`size_${img.id}`}
                                         type="radio"
                                         value="4"
-                                        onChange={onChange}
                                     />
                                     <span>30 см.</span>
-                                </label>   <label className={styles.paragraph} >
+                                </label>
+                                <label className={styles.paragraph} >
                                     <input
                                         name={`size_${img.id}`}
                                         type='radio'
                                         value='5'
-                                        onChange={onChange}
                                     />
                                     <span>40 см.</span>
                                 </label>
                             </div>
                         </Container>
-                        <Div >
+                        <Div onClick={(e) => addToChart(e.target)}>
                             <Price>
                                 {'от ' + img.smallPrice + ' ₽'}
                             </Price>
 
-                            <Add>
-                                <Text>+Добавит</Text>
-                            </Add>
+                            {!count.hasOwnProperty(img.id) ?
+                                <AddButton
+                                    name={`count_${img.id}`}
+                                    value='add'
+                                >
+                                    +Добавит
+                                </AddButton>
+                                : count[img.id] === 1 ?
+                                    <AddButton1
+
+                                        name={`count_${img.id}`}
+                                        value='add'
+                                    >
+                                        +Добавит
+                                    </AddButton1> : <AddButton
+
+                                        name={`count_${img.id}`}
+                                        value='add'
+                                    >
+                                        +Добавит {count + "-" + [img.id]}
+                                    </AddButton>
+
+                            }
+
+
                         </Div>
 
 
@@ -164,10 +184,32 @@ const PizzasList = (props) => {
 
                 )
             }) : "page not found"}
+
         </div>
     )
 }
 
+const mapStateToProps = (state) => {
+    return {
+        slim: state.pizzasListState.slim,
+        size: state.pizzasListState.size,
+        count: state.pizzasListState.count,
+
+    }
 
 
-export default PizzasList
+
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addToChart: (target) => {
+            dispatch({ type: "ADD_TO_CHART", target })
+        },
+        onChange: (target) => {
+            dispatch({ type: "ON_CHANGE", target })
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PizzasList)
