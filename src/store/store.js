@@ -7,6 +7,4 @@ const reduser = combineReducers({
 
 const store = createStore(reduser);
 
-// es tox@ animasta
-window.store = store;
 export default store;
