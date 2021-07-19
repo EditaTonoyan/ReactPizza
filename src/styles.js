@@ -7,15 +7,35 @@ const PiceOfPizza = {
 const Row1 = {
     display: 'flex',
     flexdirection: 'row',
-    width: '50%',
+    width: '92%',
     height: '50%',
     flexFlow: 'nowrap',
     marginTop: '30px',
     marginLeft: '20px'
 
-    // flexDirection: 'row',
-
 }
+const PriceAndCount = {
+    border: '0 solid',
+    padding: '5px 28px',
+    borderRadius: '33px',
+    paddingBottom: '10px',
+    margin: '29px 31px',
+    backgroundColor:'#FE5F1E'
+}
+const Button = {
+    display:'flex',
+    justifyContent:'space-between'
+}
+
+const VTLine ={
+    borderLeft: '2px solid rgba(251, 250, 247, 0.3)',
+    height: '25px',
+    position:'absolute',
+    left: '1247px',
+    top:'34px'
+}
+
+
 
 const H1 = {
     display: 'flex',
@@ -49,7 +69,7 @@ const H4 = {
     letterSpacing: '0.01em',
     textTransform: "uppercase",
     color: 'rgb(24, 24, 24)',
-    marginTop: '41px',
+    marginTop: '34px',
     fontFamily: 'Proxima Nova',
     fontStyle: 'normal',
     fontWeight: '5',
@@ -140,7 +160,15 @@ const Div = {
     justifyContent: 'space-around',
 }
 
+const LinkRigth = {
+    marginRight:'8px',
+    color:'rgba(251, 250, 247, 0.8)'
+}
+const LinkLeft = {
+    marginLeft:'8px',
+    color:'rgba(251, 250, 247, 0.8)'
 
+}
 
 
 export const styles = {
@@ -154,5 +182,10 @@ export const styles = {
     AddButton: AddButton,
     AddButton1: AddButton1,
     Container: Container,
-    Row1: Row1
+    Row1: Row1,
+    Button:Button,
+    PriceAndCount:PriceAndCount,
+    LinkRigth:LinkRigth,
+    LinkLeft:LinkLeft,
+    VTLine:VTLine,
 }

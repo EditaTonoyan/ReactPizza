@@ -8,24 +8,32 @@ import { styles } from '../../styles';
 
 const AllPizzas = (props) => {
     const context = useContext(ContextApp)
-    const { images } = context;
+    const { pizzas } = context;
     return (
         <>
-            <div>
+        <div style={styles.Button}>
+        <div>
                 <div style={styles.Row1}>
                     <img style={styles.PiceOfPizza} src={piceOfPizza} alt='icon' />
                     <h1 style={styles.H1}> REACT PIZZA</h1 >
                 </div>
-
                 <h4 style={styles.H4}>wde gregnerg ger gerg ergre</h4>
 
             </div>
+            <div style={styles.PriceAndCount}>
+                     <a style={styles.LinkRigth} href="#">price</a>
+               <div style={styles.VTLine}></div>
+                     <a  style={styles.LinkLeft}  href="#">count</a>
+            </div>
+          
+        </div>
+            
 
             <hr style={styles.Hr} />
 
             <Menu />
             <div>
-                <PizzasList images={images} />
+                <PizzasList pizzas={pizzas} />
             </div>
 
         </>

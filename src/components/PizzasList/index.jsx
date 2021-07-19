@@ -5,21 +5,19 @@ import { connect } from 'react-redux';
 
 
 const PizzasList = (props) => {
-    const { addToChart, onChange, count } = props;
-    console.log(count);
+    const { addToChart, onChange, count} = props;
 
-
+     console.log(count,'index');
 
     return (
         <div className={style.gallery} id='gallery'>
-            {/* <FilterPizzas /> */}
-            {props.images.length
-                ? props.images.map((img) => {
+            {props.pizzas.length
+                ? props.pizzas.map((pizza) => {
                     return (
-                        <div key={img.id} className={style.gallery_item}>
+                        <div key={pizza.id} className={style.gallery_item}>
                             <div>
-                                <img className={style.content} src={img.url} alt={img.name} />
-                                <p style={styles.Par}>{img.name}</p>
+                                <img className={style.content} src={pizza.url} alt={pizza.name} />
+                                <p style={styles.Par}>{pizza.name}</p>
                             </div>
                             <div style={styles.Container}>
                                 <div
@@ -28,11 +26,11 @@ const PizzasList = (props) => {
                                     }}
                                 >
                                     <label className={style.paragraph}>
-                                        <input name={`slim_${img.id}`} type='radio' value='1' />
+                                        <input name={`slim_${pizza.id}`} type='radio' value='1' />
                                         <span>Тонкое</span>
                                     </label>
                                     <label className={style.paragraph}>
-                                        <input name={`slim_${img.id}`} type='radio' value='2' />
+                                        <input name={`slim_${pizza.id}`} type='radio' value='2' />
                                         <span>Традиционное</span>
                                     </label>
                                 </div>
@@ -43,33 +41,33 @@ const PizzasList = (props) => {
                                     }}
                                 >
                                     <label className={style.paragraph}>
-                                        <input name={`size_${img.id}`} type='radio' value='3' />
+                                        <input name={`size_${pizza.id}`} type='radio' value='3' />
                                         <span>26 см.</span>
                                     </label>
                                     <label className={style.paragraph}>
-                                        <input name={`size_${img.id}`} type='radio' value='4' />
+                                        <input name={`size_${pizza.id}`} type='radio' value='4' />
                                         <span>30 см.</span>
                                     </label>
                                     <label className={style.paragraph}>
-                                        <input name={`size_${img.id}`} type='radio' value='5' />
+                                        <input name={`size_${pizza.id}`} type='radio' value='5' />
                                         <span>40 см.</span>
                                     </label>
                                 </div>
                             </div>
                             <div style={styles.Div} onClick={(e) => addToChart(e.target)}>
-                                <div style={styles.Price}>{'от ' + img.smallPrice + ' ₽'}</div>
+                                <div style={styles.Price}>{'от ' + pizza.smallPrice + ' ₽'}</div>
 
-                                {!count.hasOwnProperty(img.id) ? (
-                                    <button style={styles.AddButton} name={`count_${img.id}`} value='add'>
+                                {!count.hasOwnProperty(pizza.id) ? (
+                                    <button style={styles.AddButton} name={`count_${pizza.id}`} value='add'>
                                         +Добавит
                                     </button>
-                                ) : count[img.id] === 1 ? (
-                                    <button style={styles.AddButton1} name={`count_${img.id}`} value='add'>
+                                ) : count[pizza.id] === 1 ? (
+                                    <button style={styles.AddButton1} name={`count_${pizza.id}`} value='add'>
                                         +Добавит
                                     </button>
                                 ) : (
-                                    <button style={styles.AddButton} name={`count_${img.id}`} value='add'>
-                                        +Добавит {count + '-' + [img.id]}
+                                    <button style={styles.AddButton} name={`count_${pizza.id}`} value='add'>
+                                        +Добавит {count + '-' + [pizza.id]}
                                     </button>
                                 )}
                             </div>

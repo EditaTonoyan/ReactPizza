@@ -3,14 +3,14 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const ContextAppProvider = (props) => {
-    const [images, setImages] = useState({});
+    const [pizzas, setPizzas] = useState({});
 
     useEffect(() => {
         axios
             .get('https://pizza-dummy.herokuapp.com/pizzas/')
             .then((res) => {
                 if (res.error) throw res.error;
-                setImages(res.data);
+                setPizzas(res.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -20,7 +20,7 @@ const ContextAppProvider = (props) => {
     return (
         <ContextApp.Provider
             value={{
-                images: images,
+                pizzas: pizzas,
             }}
         >
             {props.children}
