@@ -1,13 +1,12 @@
 import './App.css';
 import AllPizzas from './components/AllPizzas';
-import ContextAppProvider from './context/providers/ContextAppProvider';
+// import ContextAppProvider from './context/providers/ContextAppProvider';
 
 function App() {
     return (
         <div>
-            <ContextAppProvider>
+            
                 <AllPizzas />
-            </ContextAppProvider>
         </div>
     );
 }

@@ -107,8 +107,16 @@ const Price = {
     lineHeight: '27px',
     letterSpacing: '0.015em',
     color: '#000000',
+    // visibility: 'hidden',
 
 }
+const HrUnvisible = {
+    color:'red',
+    marginTop:'-12px'
+
+}
+
+
 
 const Container = {
     // width: 280px;
@@ -188,4 +196,5 @@ export const styles = {
     LinkRigth:LinkRigth,
     LinkLeft:LinkLeft,
     VTLine:VTLine,
+    HrUnvisible:HrUnvisible
 }

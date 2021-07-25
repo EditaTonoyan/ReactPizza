@@ -1,42 +1,62 @@
 const initialState = {
-    slim: {},
-    size: {},
-    count: {},
+ ordered:{},
+ error:{},
+ orderedCount:0,
+ orderedPrcie:0
+
+
 };
 const pizzasListReduser = (state = initialState, action) => {
-    console.log("slim", state.slim);
-    // console.log("size", state.size);
     switch (action.type) {
+        case 'getPizzas' : {
+            return {
+                ...state,
+                pizzas: action.data
+            }
+        }
+
         case 'ADD_TO_CHART': {
-            const { name } = action.target;
-            console.log(name);
-            const id = name.replace('count_', ' ');
-            const count1 = state.count;
-
-            count1.hasOwnProperty(id) ? count1[id] += 1 : count1[id] = 1;
-
+            const {id, value } = action.target;
+            if(state.ordered.hasOwnProperty(id)){
+                if(state.ordered[id].hasOwnProperty("price")){
+                   
+                    state.ordered[id].count = value;
+                }else{
+                    state.error[id]= id
+                }
+            }else{
+                state.error[id] = id
+            }
             return {
                 ...state,
-                count: count1,
+                ordered:state.ordered,
+                error:state.error,
+                orderedCount:value + 1
+
             };
         }
+        
         case 'ON_CHANGE': {
-            const { name, value } = action.target;
-            const slim1 = state.slim;
-            const size1 = state.size;
-            const id = name.includes('slim_') ? name.replace('slim_', ' ') : name.replace('size_', ' ');
-            slim1[id] = value;
-            size1[id] = value;
-            console.log(slim1,'slim1');
-            console.log(slim1,'size1');
-
-            return {
+            const { name, value} = action.target;
+            state.ordered[name] = {price:value};
+            if(state.error.hasOwnProperty(name)){
+                delete state.error[name]
+            }
+            
+            return{
                 ...state,
-                slim: slim1,
-                size: size1,
-            };
-        }
+                ordered:state.ordered,
 
+
+            }
+            
+            
+            
+            
+           
+        }
+      
+        
         default:
             return state;
     }

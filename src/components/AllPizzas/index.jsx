@@ -1,14 +1,25 @@
 import piceOfPizza from '../../assets/icons/piceOfPizza.png';
-import { useContext } from 'react';
-import { ContextApp } from '../../context/contextApp';
 import Menu from '../Menu';
 import PizzasList from '../PizzasList';
 import { styles } from '../../styles';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import {getAllPizzas} from '../../store/action';
 
 
 const AllPizzas = (props) => {
-    const context = useContext(ContextApp)
-    const { pizzas } = context;
+    const state = useSelector((state)=>state);
+    const pizzas = state.pizzasListState.pizzas
+    const orderedCount = state.pizzasListState.orderedCount;
+    const orderedPrcie = state.pizzasListState.orderedPrcie;
+    
+    const dispatch = useDispatch();
+
+    useEffect (()=>{
+       dispatch(getAllPizzas()) 
+
+    },[dispatch])
+
     return (
         <>
         <div style={styles.Button}>
@@ -21,9 +32,22 @@ const AllPizzas = (props) => {
 
             </div>
             <div style={styles.PriceAndCount}>
-                     <a style={styles.LinkRigth} href="#">price</a>
-               <div style={styles.VTLine}></div>
-                     <a  style={styles.LinkLeft}  href="#">count</a>
+                     <a style={styles.LinkRigth} href="#">
+                         {
+                            (orderedPrcie !== 0)?
+                                (orderedPrcie) :  ""
+                         }
+                         
+                     </a>
+                        <div style={styles.VTLine}></div>
+                     <a  style={styles.LinkLeft}  href="#">
+                         
+                        {
+                            (orderedCount !== 0)?
+                                (orderedCount) :  ""
+                         }
+                         
+                    </a>
             </div>
           
         </div>
