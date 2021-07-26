@@ -1,8 +1,8 @@
 const initialState = {
-    ordered:{},
-    error:{},
-    orderedCount:0,
-    orderedPrcie:0,
+ ordered:{},
+ error:{},
+ orderedCount:0,
+ orderedPrcie:0,
 };
 const pizzasListReduser = (state = initialState, action) => {
     switch (action.type) {

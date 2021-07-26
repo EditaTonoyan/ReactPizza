@@ -1,3 +1,4 @@
+import {ShoppingCartOutlined} from '@ant-design/icons';
 import piceOfPizza from '../../assets/icons/piceOfPizza.png';
 import Menu from '../Menu';
 import PizzasList from '../PizzasList';
@@ -30,28 +31,44 @@ const AllPizzas = (props) => {
                     <img style={styles.PiceOfPizza} src={piceOfPizza} alt='icon' />
                     <h1 style={styles.H1}> REACT PIZZA</h1 >
                 </div>
-                <h4 style={styles.H4}>wde gregnerg ger gerg ergre</h4>
+                <h4 style={styles.H4}>sСамая реактивная пицца</h4>
 
             </div>
+            
             <div style={styles.PriceAndCount}>
-                     <a style={styles.LinkRigth} href="http://localhost:3000/ordered">
+
+                <div  >
+                    <a style={styles.LinkLeft} href="http://localhost:3000/ordered">
                          {
                             (orderedPrcie !== 0)?
-                                (orderedPrcie) :  ""
-                         }
-                         
-                     </a>
+                            (
+                               orderedPrcie + ' ₽ |'  
+                                
+                                    ) :  ""
+                                 
 
-                        <div style={styles.VTLine}></div>
-                        
-                     <a  style={styles.LinkLeft}  href="http://localhost:3000/ordered">
-                         
-                        {
-                            (orderedCount !== 0)?
-                                (orderedCount) :  ""
                          }
-                         
+
+                          
                     </a>
+                </div>
+                
+              
+                <div>
+                        <a href="http://localhost:3000/ordered">< ShoppingCartOutlined style = {styles.ChartIcon}/></a>   
+                 </div>
+                <div>
+                        
+                                
+                        <a   style={styles.LinkLeft}  href="http://localhost:3000/ordered">
+                            {
+                            (orderedCount !== 0)?
+                            
+                                (orderedCount) :  ""
+                            }
+                    </a>
+                </div>
+                        
             </div>
           
         </div>

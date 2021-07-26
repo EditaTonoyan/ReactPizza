@@ -15,6 +15,8 @@ const Row1 = {
 
 }
 const PriceAndCount = {
+    display:'flex',
+    justifyContent:'center',
     border: '0 solid',
     padding: '5px 28px',
     borderRadius: '33px',
@@ -30,12 +32,9 @@ const Button = {
 const VTLine ={
     borderLeft: '2px solid rgba(251, 250, 247, 0.3)',
     height: '25px',
-    position:'absolute',
     left: '1247px',
     top:'34px'
 }
-
-
 
 const H1 = {
     display: 'flex',
@@ -59,7 +58,6 @@ const H1 = {
 
 const H4 = {
     fontSize: '8px',
-
     mozLetterSpacing: '0.01em',
     msLetterSpacing: '0.01em',
     position: 'absolute',
@@ -93,8 +91,6 @@ const Par = {
     letterSpacing: '0.01em',
 }
 
-
-
 const Price = {
     width: '89px',
     height: '27px',
@@ -107,7 +103,6 @@ const Price = {
     lineHeight: '27px',
     letterSpacing: '0.015em',
     color: '#000000',
-    // visibility: 'hidden',
 
 }
 const HrUnvisible = {
@@ -116,10 +111,7 @@ const HrUnvisible = {
 
 }
 
-
-
 const Container = {
-    // width: 280px;
     height: '85px',
     marginBottom: '12px',
     left: '112px',
@@ -145,7 +137,6 @@ const AddButton = {
     borderRadius: '30px',
 }
 
-
 const AddButton1 = {
     fontFamily: 'Proxima Nova',
     fontStyle: 'normal',
@@ -162,20 +153,66 @@ const AddButton1 = {
     borderRadius: '30px',
 }
 
-
 const Div = {
     display: 'flex',
     justifyContent: 'space-around',
 }
 
 const LinkRigth = {
-    marginRight:'30px',
-    color:'rgba(251, 250, 247, 0.8)'
+    marginRight:'7px',
+    color:'#fff',
+    cursor: 'pointer',
 }
-const LinkLeft = {
-    marginLeft:'31px',
-    color:'rgba(251, 250, 247, 0.8)'
 
+const LinkLeft = {
+    marginTop:'7px',
+    color:'#fff',
+    cursor: 'pointer',
+
+}
+
+const ChartIcon ={
+    paddingTop:'3px',
+    color:'#fff',
+    fontSize:' 20px',
+}
+
+const Icon = {
+    fontSize:'50px',
+    marginRight: '20px',
+    color: '#3F3F3F',
+
+}
+
+const IconTrash ={
+    width: '20px',
+    height: '20px',
+    marginTop:'20px'
+}
+
+const Chart = {
+    fontSize:'32px',
+    color:'#000000'
+}
+
+const DeleteText = {
+    fontSize:'16px',
+    lineheight: '19px',
+    color: '#B6B6B6',
+    marginTop:'16px'
+
+}
+
+
+const OrderedDiv ={
+    display:'flex',
+
+}
+
+const Content = {
+    display: 'flex',
+    justifyContent: 'space-around',
+    marginTop:'140px' ,
 }
 
 
@@ -196,5 +233,12 @@ export const styles = {
     LinkRigth:LinkRigth,
     LinkLeft:LinkLeft,
     VTLine:VTLine,
-    HrUnvisible:HrUnvisible
+    HrUnvisible:HrUnvisible.color,
+    ChartIcon:ChartIcon,
+    Icon:Icon,
+    Chart:Chart,
+    OrderedDiv:OrderedDiv,
+    Content:Content,
+    IconTrash:IconTrash,
+    DeleteText:DeleteText
 }
