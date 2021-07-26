@@ -16,7 +16,6 @@ const PizzasList = (props) => {
     const dispatch = useDispatch();
     const ordered = state.pizzasListState.ordered;
     const error = state.pizzasListState.error;
-console.log("error", error);
 
     const addToChart = (e)=>{
         dispatch({type:'ADD_TO_CHART', target:e.target})
@@ -58,9 +57,16 @@ console.log("error", error);
                                     Object.keys(sizes).map((size, index)=>{
                                         return (
                                         <>
-                                            <label key= {index} className={style.paragraph}>
+                                            <label 
+                                                key= {index} 
+                                                className={style.paragraph}>
                                                
-                                                <input onClick={onChange} name={pizza.id}  type='radio' value={pizza[size]} />
+                                                <input 
+                                                    onClick={onChange} 
+                                                    name={pizza.id}  
+                                                    type='radio' 
+                                                    value={pizza[size]}
+                                                />
                                                     <span>{sizes[size]}</span>
                                              </label>
                                             
@@ -68,9 +74,8 @@ console.log("error", error);
                                         ) 
                                     })
                                   }
-                                  {
 
-                                     
+                                  {                  
                                       (error.hasOwnProperty(pizza.id))?
                                         (<hr style={styles.HrUnvisible}/>):" "
                                   }
@@ -83,45 +88,56 @@ console.log("error", error);
                                     'от ' + ordered[pizza.id].price + ' ₽':''
                                 }
                                 </div>
-                                <button 
-                                    onClick={addToChart} 
-                                    style={styles.AddButton} 
-                                    name={`count_${pizza.id}`} 
-                                    value='1'
-                                    id={pizza.id}
-                                >
-                                    +Добавит
-                                </button>
-                            </div>
-                           
-                               
-                                {/* {
-                                    state.pizzasListState.count.hasOwnProperty(pizza.id)? (
-                                        <button  onClick={addToChart} style={styles.AddButton1} name={`count_${pizza.id}`} value='add'>
-                                            +Добавит
-                                        </button>):(
-                                            <button onClick={addToChart} style={styles.AddButton} name={`count_${pizza.id}`} value='add'>
+                               {
+                                   (ordered[pizza.id])?
+                                     (ordered[pizza.id].count === 1)?
+
+                                                (<button 
+                                                    onClick={addToChart} 
+                                                    style={styles.AddButton1} 
+                                                    name={`count_${pizza.id}`} 
+                                                    value='1'
+                                                    id={pizza.id}
+                                                > +Добавит 
+                                                </button>):
+
+                                            (ordered[pizza.id].count > 1)?
+                                                (
+                                                <button 
+                                                    onClick={addToChart} 
+                                                    style={styles.AddButton} 
+                                                    name={`count_${pizza.id}`} 
+                                                    value='1'
+                                                    id={pizza.id}
+                                                >
+                                                    +Добавит {ordered[pizza.id].count}
+                                                </button>):
+
+                                                (
+                                                <button 
+                                                    onClick={addToChart} 
+                                                    style={styles.AddButton} 
+                                                    name={`count_${pizza.id}`} 
+                                                    value='1'
+                                                    id={pizza.id}
+                                                >
+                                                    +Добавит
+                                                </button>):
+
+                                           ( <button 
+                                                onClick={addToChart} 
+                                                style={styles.AddButton} 
+                                                name={`count_${pizza.id}`} 
+                                                value='1'
+                                                id={pizza.id}
+                                            >
                                                 +Добавит
-                                            </button>
-                                        )
-                                } */}
+                                            </button>)
+                                         
+                               }
                                
-                                {/* {
-                                !count.hasOwnProperty(pizza.id) ? (
-                                    <button onClick={addToChart} style={styles.AddButton} name={`count_${pizza.id}`} value='add'>
-                                        +Добавит
-                                    </button>
-                                ) : count[pizza.id] === 1 ? (
-                                    <button  onClick={addToChart} style={styles.AddButton1} name={`count_${pizza.id}`} value='add'>
-                                        +Добавит
-                                    </button>
-                                ) : (
-                                    <button onClick={addToChart}  style={styles.AddButton} name={`count_${pizza.id}`} value='add'>
-                                        +Добавит {count + '-' + [pizza.id]}
-                                    </button>
-                                )
-                                } */}
                             </div>
+                        </div>
                    
                     );
                 })

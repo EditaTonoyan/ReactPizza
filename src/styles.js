@@ -169,11 +169,11 @@ const Div = {
 }
 
 const LinkRigth = {
-    marginRight:'8px',
+    marginRight:'30px',
     color:'rgba(251, 250, 247, 0.8)'
 }
 const LinkLeft = {
-    marginLeft:'8px',
+    marginLeft:'31px',
     color:'rgba(251, 250, 247, 0.8)'
 
 }

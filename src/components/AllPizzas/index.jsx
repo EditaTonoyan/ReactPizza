@@ -20,6 +20,8 @@ const AllPizzas = (props) => {
 
     },[dispatch])
 
+
+    
     return (
         <>
         <div style={styles.Button}>
@@ -32,15 +34,17 @@ const AllPizzas = (props) => {
 
             </div>
             <div style={styles.PriceAndCount}>
-                     <a style={styles.LinkRigth} href="#">
+                     <a style={styles.LinkRigth} href="http://localhost:3000/ordered">
                          {
                             (orderedPrcie !== 0)?
                                 (orderedPrcie) :  ""
                          }
                          
                      </a>
+
                         <div style={styles.VTLine}></div>
-                     <a  style={styles.LinkLeft}  href="#">
+                        
+                     <a  style={styles.LinkLeft}  href="http://localhost:3000/ordered">
                          
                         {
                             (orderedCount !== 0)?

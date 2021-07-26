@@ -1,10 +1,8 @@
 const initialState = {
- ordered:{},
- error:{},
- orderedCount:0,
- orderedPrcie:0
-
-
+    ordered:{},
+    error:{},
+    orderedCount:0,
+    orderedPrcie:0,
 };
 const pizzasListReduser = (state = initialState, action) => {
     switch (action.type) {
@@ -19,8 +17,15 @@ const pizzasListReduser = (state = initialState, action) => {
             const {id, value } = action.target;
             if(state.ordered.hasOwnProperty(id)){
                 if(state.ordered[id].hasOwnProperty("price")){
-                   
-                    state.ordered[id].count = value;
+                    if(state.ordered[id].hasOwnProperty("count")){
+                        state.ordered[id].count += parseInt(value);
+
+                    }else{
+                        state.ordered[id].count = parseInt(value);
+                    }
+                    state.orderedCount += parseInt(value);
+                     state.orderedPrcie += parseInt(state.ordered[id].price)
+
                 }else{
                     state.error[id]= id
                 }
@@ -31,7 +36,7 @@ const pizzasListReduser = (state = initialState, action) => {
                 ...state,
                 ordered:state.ordered,
                 error:state.error,
-                orderedCount:value + 1
+                orderedCount:state.orderedCount,
 
             };
         }
@@ -46,17 +51,9 @@ const pizzasListReduser = (state = initialState, action) => {
             return{
                 ...state,
                 ordered:state.ordered,
-
-
             }
-            
-            
-            
-            
-           
         }
       
-        
         default:
             return state;
     }
