@@ -111,7 +111,8 @@ const Price = {
 }
 const HrUnvisible = {
     color:'red',
-    marginTop:'-12px'
+    marginTop:'-12px',
+    width: '232px',
 
 }
 
@@ -210,6 +211,8 @@ const DeleteText = {
 
 const OrderedDiv ={
     display:'flex',
+    border:'none',
+    backgroundColor:'#fff'
 
 }
 
@@ -282,6 +285,35 @@ const TitleLink ={
 }
 
 
+const ChartIsEmpty = {
+    fontWeight: 'bold',
+    fontSize: '32px',
+    letterSpacing: '0.01em',
+    textAlign:'center',
+    marginTop:'200px'
+}
+
+const Text = {
+    textAlign:'center',
+
+}
+
+const EmptyImage ={
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    width: '35%'
+}
+
+const GoBack = {
+    marginTop:'40px',
+    color:'#fff',
+    backgroundColor:'#282828',
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+}
+
 export const styles = {
     PiceOfPizza: PiceOfPizza,
     Hr: Hr,
@@ -299,7 +331,7 @@ export const styles = {
     LinkRigth:LinkRigth,
     LinkLeft:LinkLeft,
     VTLine:VTLine,
-    HrUnvisible:HrUnvisible.color,
+    HrUnvisible:HrUnvisible,
     ChartIcon:ChartIcon,
     Icon:Icon,
     Chart:Chart,
@@ -317,5 +349,10 @@ export const styles = {
     ButtonStyle:ButtonStyle,
     ButtonStyle1:ButtonStyle1,
     Incdec:Incdec,
-    TitleLink:TitleLink
+    TitleLink:TitleLink,
+    ChartIsEmpty:ChartIsEmpty,
+    Text:Text,
+    EmptyImage:EmptyImage,
+    GoBack:GoBack
+
 }

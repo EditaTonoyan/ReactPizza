@@ -68,14 +68,34 @@ const pizzasListReduser = (state = initialState, action) => {
 
                         state.orderedCount = state.orderedCount - 1
                         state.orderedPrcie = parseInt(state.orderedPrcie) - parseInt(state.ordered[name].price)
- 
                     }
                 }
-          
             return{
                 ...state,
                 ordered:state.ordered,
             }    
+        }
+
+        case "DELETE_PIZZA":{
+            const {name} = action.target
+            const { [name]: remove, ...rest} = state.ordered;
+            state.orderedCount = state.orderedCount - state.ordered[name].count
+            state.orderedPrcie = state.orderedPrcie - state.ordered[name].price * state.ordered[name].count
+            return{
+                ...state,
+                ordered:rest,
+            }
+
+        }
+
+        case "DELETE_ALL":{
+            console.log(state);
+            return{
+                ...state,
+                orderedCount:0,
+                orderedPrcie:0,
+                ordered:{}
+            }
         }
       
         default:

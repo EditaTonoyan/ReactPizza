@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 
 
 const OrderedList = (props) => {
+
     const pizzas = useSelector(state => state.pizzasListState.pizzas);
     const ordered = useSelector(state => state.pizzasListState.ordered);
     const orderedCount = useSelector(state => state.pizzasListState.orderedCount);
@@ -20,8 +21,18 @@ const OrderedList = (props) => {
 
     const changeCount = (e) => {
         dispatch({type:'CHANGE_COUNT', target:e.target})
-        
     }
+
+    const deletePizza = (e) => {
+        dispatch({type:'DELETE_PIZZA', target:e.target})
+    }
+
+    const deleteAll = () => {
+        dispatch({type:'DELETE_ALL'})
+
+    }
+
+    
     
     return(
         <div>
@@ -50,10 +61,10 @@ const OrderedList = (props) => {
                         <p style={styles.Chart}>Корзина</p>
                     </div>
 
-                    <div  style={styles.OrderedDiv}>
+                    <button  onClick={deleteAll} style={styles.OrderedDiv}>
                         <img style={styles.IconTrash} src={trash} alt="trashImage" />
                         <p style={styles.DeleteText}> Очистить корзину</p>
-                    </div>
+                    </button>
                 </div>
 
                 <hr style={styles.HrOrderedList}/>
@@ -65,8 +76,8 @@ const OrderedList = (props) => {
             {
                 (ordered)?
                 Object.keys(ordered).map((key, index) => {
+                    if(ordered[key].count) {
                     const pizzasKey = pizzas.findIndex(x => x.id == key);
-                    console.log(ordered[key].count);
                     return (
                         <div key={index} style={styles.Grid}>
                             <div style={styles.OrderedDiv}>
@@ -102,14 +113,19 @@ const OrderedList = (props) => {
                             </div>
 
                             <div style={styles.OrderedInfo}>
-                                <Button shape="circle">
+                                <button 
+                                    onClick={deletePizza}
+                                    name={key}
+                                    style={styles.Incdec}
+                                    shape="circle"
+                                >
                                     x
-                                </Button>
+                                </button>
                             </div>
                         </div>
                        
                     )
-                    
+                    }
                   }):''
      
             }

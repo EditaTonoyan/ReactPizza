@@ -9,6 +9,7 @@ import {getAllPizzas} from '../../store/action';
 import {Link} from 'react-router-dom';
 
 
+
 const AllPizzas = (props) => {
     const state = useSelector((state)=>state);
     const pizzas = state.pizzasListState.pizzas
@@ -23,7 +24,6 @@ const AllPizzas = (props) => {
     },[dispatch])
 
 
-    
     return (
         <>
         <div style={styles.Button}>
@@ -40,7 +40,7 @@ const AllPizzas = (props) => {
 
                 <div  >
 
-                    <Link to='/ordered'>
+                    <Link to={orderedCount ? '/ordered' : '/empty'}>
                         <a style={styles.LinkLeft} href="#">
                             {
                                 (orderedPrcie !== 0)?
@@ -54,18 +54,18 @@ const AllPizzas = (props) => {
 
                             
                         </a>
-                        </Link>
+                    </Link>
                 </div>
                 
               
                 <div>
-                    <Link to='/ordered'>
+                    <Link to={orderedCount ? '/ordered' : '/empty'}>
                         <a href="#">< ShoppingCartOutlined style = {styles.ChartIcon}/></a>   
                     </Link>
                  </div>
                 <div>
                         
-                    <Link to='/ordered'>                
+                    <Link to={orderedCount ? '/ordered' : '/empty'}>                
                         <a   style={styles.LinkLeft}  href="http://localhost:3000/ordered">
                             {
                             (orderedCount !== 0)?
