@@ -5,6 +5,7 @@ const initialState = {
  orderedPrcie:0,
 };
 const pizzasListReduser = (state = initialState, action) => {
+    
     switch (action.type) {
         case 'getPizzas' : {
             return {
@@ -47,11 +48,34 @@ const pizzasListReduser = (state = initialState, action) => {
             if(state.error.hasOwnProperty(name)){
                 delete state.error[name]
             }
-            
+
             return{
                 ...state,
                 ordered:state.ordered,
             }
+        }
+
+        case "CHANGE_COUNT":{
+            const {name, value} = action.target
+               if(value === 'plus'){
+                state.ordered[name].count = state.ordered[name].count + 1
+                state.orderedCount = state.orderedCount + 1
+                state.orderedPrcie = parseInt(state.orderedPrcie) + parseInt(state.ordered[name].price)
+                   
+                }else if (value === 'minus'){
+                    if(state.ordered[name].count > 1){
+                        state.ordered[name].count -=   1
+
+                        state.orderedCount = state.orderedCount - 1
+                        state.orderedPrcie = parseInt(state.orderedPrcie) - parseInt(state.ordered[name].price)
+ 
+                    }
+                }
+          
+            return{
+                ...state,
+                ordered:state.ordered,
+            }    
         }
       
         default:

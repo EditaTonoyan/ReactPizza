@@ -6,6 +6,7 @@ import { styles } from '../../styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import {getAllPizzas} from '../../store/action';
+import {Link} from 'react-router-dom';
 
 
 const AllPizzas = (props) => {
@@ -38,35 +39,41 @@ const AllPizzas = (props) => {
             <div style={styles.PriceAndCount}>
 
                 <div  >
-                    <a style={styles.LinkLeft} href="http://localhost:3000/ordered">
-                         {
-                            (orderedPrcie !== 0)?
-                            (
-                               orderedPrcie + ' ₽ |'  
-                                
-                                    ) :  ""
-                                 
 
-                         }
+                    <Link to='/ordered'>
+                        <a style={styles.LinkLeft} href="#">
+                            {
+                                (orderedPrcie !== 0)?
+                                (
+                                orderedPrcie + ' ₽ |'  
+                                    
+                                        ) :  ""
+                                    
 
-                          
-                    </a>
+                            }
+
+                            
+                        </a>
+                        </Link>
                 </div>
                 
               
                 <div>
-                        <a href="http://localhost:3000/ordered">< ShoppingCartOutlined style = {styles.ChartIcon}/></a>   
+                    <Link to='/ordered'>
+                        <a href="#">< ShoppingCartOutlined style = {styles.ChartIcon}/></a>   
+                    </Link>
                  </div>
                 <div>
                         
-                                
+                    <Link to='/ordered'>                
                         <a   style={styles.LinkLeft}  href="http://localhost:3000/ordered">
                             {
                             (orderedCount !== 0)?
                             
                                 (orderedCount) :  ""
                             }
-                    </a>
+                        </a>
+                    </Link>
                 </div>
                         
             </div>

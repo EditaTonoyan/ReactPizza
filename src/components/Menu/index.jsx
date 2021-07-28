@@ -1,20 +1,6 @@
 import styled from 'styled-components';
-// import { NavLink } from 'react-router-dom';
 
-// const navlinks = [
-//     {
-//         to: "/",
-//         exact: true,
-//         value: "All",
-//     },
-//     {
-//         to: "/meat",
-//         exact: true,
-//         value: "Мясные"
-//     }
-// ]
 const Menu = () => {
-    // styler@ componentic durs sarqi ete shat en arandznacnum es arandzin styles.js fayli
     const Button = styled.button`
         width: 120px;
         height: 50px;
@@ -30,24 +16,6 @@ const Menu = () => {
 
     return (
         <Div>
-            {/* {
-                navlinks.map((navlink, index) => {
-                    return (
-
-                        <Button>
-                            <NavLink
-
-                                key={index}
-                                to={navlink.to}
-                                className="main_menu"
-                                exact={navlink.exact}
-                            >
-                                {navlink.value}
-                            </NavLink>
-                        </Button>
-                    )
-                })
-            } */}
 
             <Button>Все</Button>
             <Button>Мясные</Button>

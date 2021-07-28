@@ -75,10 +75,10 @@ const PizzasList = (props) => {
                                     })
                                   }
 
-                                  {                  
+                                  {/* {                  
                                       (error.hasOwnProperty(pizza.id))?
                                         (<hr style={styles.HrUnvisible}/>):" "
-                                  }
+                                  } */}
                                    
                                 </div>
                             </div>                              
