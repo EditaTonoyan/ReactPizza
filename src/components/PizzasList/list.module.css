@@ -1,62 +1,57 @@
 .body {
-    background-color: rgb(206, 202, 202);
-  }
+  background-color: rgb(206, 202, 202);
+}
 
+.content img {
+  left: 50%;
+}
 
-  .content img {
-    left: 50%;
-  }
-  
-  .gallery {
-    margin-top: 20px;
-    margin-left: 5px;
-    display: grid;
-    grid-column-gap: 50px;
-    grid-template-columns: auto auto auto;
-    background-color: #2196F3;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    font-size: 30px;
-    text-align: center;
-  }
-  .gallery img {
-    margin-top: 20px;
-    width: 260px;
-    height: 260px;
-    left: 1072px;
-    top: 897px;
-    object-fit: cover;
-  }
+.gallery {
+  margin-top: 20px;
+  margin-left: 5px;
+  display: grid;
+  grid-column-gap: 50px;
+  grid-template-columns: auto auto auto;
+  background-color: #2196f3;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+.gallery img {
+  margin-top: 20px;
+  width: 260px;
+  height: 260px;
+  left: 1072px;
+  top: 897px;
+  object-fit: cover;
+}
 
-  
-  .gallery .gallery_item {
-    display: flex;
-    flex-direction: column;
-    transition: grid-row-start 300ms linear;
-    transition: transform 300ms ease;
-    transition: all 0.5s ease;
-    cursor: pointer;
-  }
+.gallery .gallery_item {
+  display: flex;
+  flex-direction: column;
+  transition: grid-row-start 300ms linear;
+  transition: transform 300ms ease;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
 
+.paragraph {
+  font-family: Proxima Nova;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  letter-spacing: 0.015em;
+  color: #2c2c2c;
+}
 
-  .paragraph {
-    font-family: Proxima Nova;
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 17px;
-    text-align: center;
-    letter-spacing: 0.015em;
-    color: #2C2C2C;
-    
-  }
-  
-  input[type="radio"] {
-    opacity: 0;
-  }
+input[type="radio"] {
+  opacity: 0;
+}
 
-
- input:checked ~ span {
+input:checked ~ span {
   color: inherit;
   background-color: white;
   cursor: pointer;
@@ -65,4 +60,3 @@
   border-radius: 5px;
   width: auto;
 }
-
