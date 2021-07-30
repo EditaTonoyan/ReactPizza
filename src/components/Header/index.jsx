@@ -33,7 +33,7 @@ const AllPizzas = () => {
           </div>
           <h4 style={styles.H4}>Самая реактивная пицца</h4>
         </div>
-        <Link to={orderedCount ? "/ordered" : "/empty"}>
+        <Link to="/chart">
           <div style={styles.PriceAndCount}>
             <div>
               <button style={styles.LinkLeft}>

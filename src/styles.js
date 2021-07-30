@@ -338,8 +338,6 @@ const VerticalLine = {
   borderLeft: "2px solid rgb(182, 182, 182)",
   height: "20px",
   position: "absolute",
-  // marginLeft: "-3px",
-  // top: "0",
 };
 
 export const styles = {

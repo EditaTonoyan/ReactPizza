@@ -5,6 +5,7 @@ import { Button } from "antd";
 import { Link } from "react-router-dom";
 import piceOfPizza from "../../assets/icons/piceOfPizza.png";
 import trash from "../../assets/icons/trash.svg";
+import EmptyChart from "../EmptyChart";
 
 const OrderedList = () => {
   const pizzas = useSelector((state) => state.pizzasListState.pizzas);
@@ -28,6 +29,8 @@ const OrderedList = () => {
 
   return (
     <div>
+      {!orderedPrcie && <EmptyChart />}
+
       <div>
         <div style={styles.Button}>
           <Link to="/">

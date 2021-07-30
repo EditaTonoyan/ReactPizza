@@ -43,7 +43,6 @@ const pizzasListReduser = (state = initialState, action) => {
       const { name, value } = action.target;
       if (typeof state.ordered[name] !== "undefined") {
         if (state.ordered[name].hasOwnProperty("count")) {
-          // console.log(state.ordered[name].count, " = count");
           state.orderedCount = state.orderedCount - state.ordered[name].count;
           console.log(state.ordered[name].price);
           state.orderedPrcie =
