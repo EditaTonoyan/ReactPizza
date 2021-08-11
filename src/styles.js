@@ -75,7 +75,7 @@ const H4 = {
   lineHeight: "26px",
   letterSpacing: "0.01em",
   color: "#7B7B7B",
-  marginTop: "34px",
+  marginTop: "35px",
   fontStyle: "normal",
   fontWeight: "normal",
 };
@@ -340,6 +340,42 @@ const VerticalLine = {
   position: "absolute",
 };
 
+const SignIn = {
+  margin: "10px 5px ",
+  float: "right",
+  border: "1px solid rgb(235, 90, 30)",
+  borderRadius: "5px",
+  cursor: "pointer",
+};
+
+const Form = {
+  margin: "20px 0 0 125px",
+  width: "900px",
+};
+
+const SuccessMessage = {
+  width: "550px",
+  disolay: "flex",
+  color: "#270",
+  backgroundColor: "#DFF2BF",
+  margin: "15px 0 15px 321px",
+};
+
+const Span = {
+  marginLeft: "5px",
+  font: "16px normal arial",
+};
+
+const RegHeader = {
+  fontSize: "32px",
+  fontWeight: "300",
+  color: "#4c4c4c",
+  textAlign: "center",
+  paddingTop: "10px",
+  marginBottom: "10px",
+};
+
+const Check = { margin: "0" };
 export const styles = {
   PiceOfPizza: PiceOfPizza,
   Hr: Hr,
@@ -385,4 +421,10 @@ export const styles = {
   Flex: Flex,
   DeleteButton: DeleteButton,
   VerticalLine: VerticalLine,
+  SignIn: SignIn,
+  Form: Form,
+  SuccessMessage: SuccessMessage,
+  Span: Span,
+  Check: Check,
+  RegHeader: RegHeader,
 };

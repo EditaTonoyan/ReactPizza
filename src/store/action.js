@@ -12,3 +12,28 @@ export const getAllPizzas = (data) => (dispatch) => {
       console.log("error", error);
     });
 };
+
+export const register = (firstName, lastName, email, password) => (dispatch) => {
+  axios
+    .post("https://pizza-dummy.herokuapp.com/auth/registration/", {
+      email,
+      firstName,
+      lastName,
+      password,
+    })
+    .then(
+      (response) => {
+        dispatch({
+          type: "SUCCESS_MESSAGE",
+          successMessage: "Congratulations, your account has been successfully created!",
+        });
+
+        return Promise.resolve();
+      },
+      (error) => {
+        console.log("error->", error.message);
+
+        return Promise.reject();
+      }
+    );
+};

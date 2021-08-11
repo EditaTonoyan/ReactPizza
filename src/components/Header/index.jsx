@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllPizzas } from "../../store/action";
 import { Link } from "react-router-dom";
+import { Button } from "antd";
 import piceOfPizza from "../../assets/icons/piceOfPizza.png";
 import Menu from "../Menu";
 import PizzasList from "../PizzasList";
@@ -21,6 +22,14 @@ const AllPizzas = () => {
 
   return (
     <>
+      <div>
+        <Link to="/joinus">
+          <Button style={styles.SignIn}>Join US</Button>
+        </Link>
+        <Link to="/login">
+          <Button style={styles.SignIn}>Sign In</Button>
+        </Link>
+      </div>
       <div style={styles.Button}>
         <div>
           <div style={styles.Row1}>
@@ -33,6 +42,7 @@ const AllPizzas = () => {
           </div>
           <h4 style={styles.H4}>Самая реактивная пицца</h4>
         </div>
+
         <Link to="/chart">
           <div style={styles.PriceAndCount}>
             <div>
