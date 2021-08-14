@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import piceOfPizza from "../../assets/icons/piceOfPizza.png";
 import trash from "../../assets/icons/trash.svg";
 import EmptyChart from "../EmptyChart";
+import { order } from "../../store/action";
 
 const OrderedList = () => {
   const pizzas = useSelector((state) => state.pizzasListState.pizzas);
@@ -14,7 +15,9 @@ const OrderedList = () => {
   const orderedPrcie = useSelector((state) => state.pizzasListState.orderedPrcie);
 
   const dispatch = useDispatch();
-
+  const peyNow = () => {
+    dispatch(order(ordered));
+  };
   const changeCount = (e) => {
     dispatch({ type: "CHANGE_COUNT", target: e.target });
   };
@@ -125,7 +128,7 @@ const OrderedList = () => {
           </Button>
         </Link>
 
-        <Button style={styles.ButtonStyle} shape="round" size="large">
+        <Button onClick={peyNow} style={styles.ButtonStyle} shape="round" size="large">
           Оплатить сейчас
         </Button>
       </div>

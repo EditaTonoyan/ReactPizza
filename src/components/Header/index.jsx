@@ -1,21 +1,26 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
+import "antd/dist/antd.css";
 import { styles } from "../../styles";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllPizzas } from "../../store/action";
 import { Link } from "react-router-dom";
-import { Button } from "antd";
+import { Button, Menu } from "antd";
 import piceOfPizza from "../../assets/icons/piceOfPizza.png";
-import Menu from "../Menu";
+import Menu1 from "../Menu";
 import PizzasList from "../PizzasList";
-
+import { UserOutlined } from "@ant-design/icons";
+const { SubMenu } = Menu;
 const AllPizzas = () => {
+  const pizUser = JSON.parse(localStorage.getItem("pizUser"));
   const pizzas = useSelector((state) => state.pizzasListState.pizzas);
   const orderedCount = useSelector((state) => state.pizzasListState.orderedCount);
   const orderedPrcie = useSelector((state) => state.pizzasListState.orderedPrcie);
-
   const dispatch = useDispatch();
 
+  const logout = () => {
+    dispatch({ type: "LOGOUT", successMessage: "kkkk" });
+  };
   useEffect(() => {
     dispatch(getAllPizzas());
   }, [dispatch]);
@@ -23,12 +28,42 @@ const AllPizzas = () => {
   return (
     <>
       <div>
-        <Link to="/joinus">
-          <Button style={styles.SignIn}>Join US</Button>
+        {pizUser ? (
+          <div style={styles.User}>
+            <Menu mode="inline">
+              <SubMenu
+                key="sub1"
+                title={
+                  <span>
+                    <UserOutlined />
+                    {" " + pizUser.user.firstName}
+                  </span>
+                }
+              >
+                <Menu.ItemGroup key="g1" title={pizUser.user.email}>
+                  <Menu.Item key="1" onClick={logout}>
+                    LogOut
+                  </Menu.Item>
+                </Menu.ItemGroup>
+              </SubMenu>
+            </Menu>
+          </div>
+        ) : (
+          <div>
+            <Link to="/joinus">
+              <Button style={styles.SignIn}>Join Us</Button>
+            </Link>
+            <Link to="/login">
+              <Button style={styles.SignIn}>Sign In</Button>
+            </Link>
+          </div>
+        )}
+        {/* <Link to="/joinus">
+          <Button style={styles.SignIn}>Join Us</Button>
         </Link>
         <Link to="/login">
           <Button style={styles.SignIn}>Sign In</Button>
-        </Link>
+        </Link> */}
       </div>
       <div style={styles.Button}>
         <div>
@@ -64,10 +99,8 @@ const AllPizzas = () => {
           </div>
         </Link>
       </div>
-
       <hr style={styles.Hr} />
-
-      <Menu />
+      <Menu1 />
       <div>
         <PizzasList pizzas={pizzas} />
       </div>

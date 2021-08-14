@@ -10,6 +10,7 @@ const pizzasListReduser = (state = initialState, action) => {
   switch (action.type) {
     case "ON_CHANGE": {
       const { name, value } = action.target;
+
       return {
         ...state,
         [name]: value,
@@ -23,6 +24,14 @@ const pizzasListReduser = (state = initialState, action) => {
       };
     }
     case "SUCCESS_MESSAGE": {
+      return {
+        ...state,
+        successMessage: action.successMessage,
+      };
+    }
+
+    case "LOGOUT": {
+      localStorage.removeItem("pizUser");
       return {
         ...state,
         successMessage: action.successMessage,

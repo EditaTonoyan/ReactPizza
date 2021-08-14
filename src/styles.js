@@ -341,11 +341,13 @@ const VerticalLine = {
 };
 
 const SignIn = {
-  margin: "10px 5px ",
-  float: "right",
-  border: "1px solid rgb(235, 90, 30)",
-  borderRadius: "5px",
   cursor: "pointer",
+  float: "right",
+  margin: "10px 5px ",
+  borderRadius: "5px",
+  padding: "5px",
+  background: "linear-gradient(to bottom, #F4956F 0%, #FE5F1E 50%, #F4956F 100%)",
+  color: "#fff",
 };
 
 const Form = {
@@ -373,6 +375,12 @@ const RegHeader = {
   textAlign: "center",
   paddingTop: "10px",
   marginBottom: "10px",
+};
+
+const User = {
+  display: "flex",
+  float: "right",
+  margin: "10px 5px ",
 };
 
 const Check = { margin: "0" };
@@ -427,4 +435,5 @@ export const styles = {
   Span: Span,
   Check: Check,
   RegHeader: RegHeader,
+  User: User,
 };

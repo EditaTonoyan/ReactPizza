@@ -1,21 +1,37 @@
 import React from "react";
 import { Form, Input, Button, Checkbox } from "antd";
-// import { faCheck } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { styles } from "../../styles";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import piceOfPizza from "../../assets/icons/piceOfPizza.png";
+import { login } from "../../store/action";
+import { useHistory } from "react-router-dom";
 
-const LogIn = () => {
-  const { email, password } = useSelector((state) => state.registerState);
+const LogIn = (props) => {
+  const history = useHistory();
+  const { email, password, successMessage } = useSelector((state) => state.registerState);
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
     dispatch({ type: "ON_CHANGE", target: e.target });
   };
+
+  const onClickLogin = () => {
+    if (email && password) {
+      dispatch(login(email, password, history));
+    }
+  };
+  const success = successMessage;
+
   return (
     <>
+      <div>
+        <Link to="/joinus">
+          <Button style={styles.SignIn}>Join Us</Button>
+        </Link>
+      </div>
       <div style={styles.Button}>
         <Link to="/">
           <div>
@@ -51,6 +67,14 @@ const LogIn = () => {
           remember: true,
         }}
       >
+        {successMessage && (
+          <div style={styles.SuccessMessage}>
+            <span>
+              <FontAwesomeIcon style={styles.Check} icon={faCheck} />
+            </span>
+            <span style={styles.Span}>{success}</span>
+          </div>
+        )}
         <Form.Item
           name="email"
           label="Email"
@@ -94,7 +118,7 @@ const LogIn = () => {
             span: 16,
           }}
         >
-          <Button type="primary" htmlType="submit">
+          <Button onClick={onClickLogin} type="primary" htmlType="submit">
             Sign In
           </Button>
         </Form.Item>

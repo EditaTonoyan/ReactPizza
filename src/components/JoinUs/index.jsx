@@ -8,26 +8,32 @@ import { register } from "../../store/action";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import piceOfPizza from "../../assets/icons/piceOfPizza.png";
+import { useHistory } from "react-router-dom";
 
 const JoinUs = () => {
+  let history = useHistory();
   const { firstName, lastName, email, password, successMessage } = useSelector(
     (state) => state.registerState
   );
   const dispatch = useDispatch();
 
-  console.log(successMessage);
   const onChange = (e) => {
     dispatch({ type: "ON_CHANGE", target: e.target });
   };
 
   const handleRegister = () => {
     if (firstName && lastName && email && password) {
-      dispatch(register(firstName, lastName, email, password));
+      dispatch(register(firstName, lastName, email, password, history));
     }
   };
   const success = successMessage;
   return (
     <>
+      <div>
+        <Link to="/login">
+          <Button style={styles.SignIn}>Sign In</Button>
+        </Link>
+      </div>
       <div style={styles.Button}>
         <Link to="/">
           <div>

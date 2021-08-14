@@ -1,6 +1,6 @@
 import { styles } from "../../styles";
 
-const Menu = () => {
+const Menu1 = () => {
   return (
     <div style={styles.Menu}>
       <button style={styles.MenuButton}>Все</button>
@@ -13,4 +13,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default Menu1;
