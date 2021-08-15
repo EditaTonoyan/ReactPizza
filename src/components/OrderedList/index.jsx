@@ -3,21 +3,40 @@ import { useDispatch, useSelector } from "react-redux";
 import { styles } from "../../styles";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
+import { faCheck, faWindowClose } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import piceOfPizza from "../../assets/icons/piceOfPizza.png";
 import trash from "../../assets/icons/trash.svg";
 import EmptyChart from "../EmptyChart";
 import { order } from "../../store/action";
+import { useHistory } from "react-router-dom";
 
 const OrderedList = () => {
+  const history = useHistory();
   const pizzas = useSelector((state) => state.pizzasListState.pizzas);
   const ordered = useSelector((state) => state.pizzasListState.ordered);
   const orderedCount = useSelector((state) => state.pizzasListState.orderedCount);
   const orderedPrcie = useSelector((state) => state.pizzasListState.orderedPrcie);
+  const state = useSelector((state) => state.registerState);
 
   const dispatch = useDispatch();
+  let orderPizzas = [];
+  const pizzasList = pizzas.map((pizza) => {
+    if (ordered[pizza.id]) {
+      orderPizzas = [
+        {
+          id: pizza.id,
+          count: ordered[pizza.id].count,
+        },
+      ];
+    }
+    return orderPizzas;
+  });
+
   const peyNow = () => {
-    dispatch(order(ordered));
+    dispatch(order(orderPizzas, history));
   };
+
   const changeCount = (e) => {
     dispatch({ type: "CHANGE_COUNT", target: e.target });
   };
@@ -29,6 +48,9 @@ const OrderedList = () => {
   const deleteAll = () => {
     dispatch({ type: "DELETE_ALL" });
   };
+
+  const success = state.successMessage;
+  const error = state.errorMessage;
 
   return (
     <div>
@@ -48,7 +70,6 @@ const OrderedList = () => {
                 </h1>
               </div>
               <h4>
-                {" "}
                 <a style={styles.H4} href="/">
                   Самая реактивная пицца
                 </a>
@@ -71,6 +92,23 @@ const OrderedList = () => {
         </div>
 
         <hr style={styles.HrOrderedList} />
+
+        {state.errorMessage && (
+          <div style={styles.ErrorMessage}>
+            <span>
+              <FontAwesomeIcon style={styles.Check} icon={faWindowClose} />
+            </span>
+            <span style={styles.Span}>{error}</span>
+          </div>
+        )}
+        {state.successMessage && (
+          <div style={styles.SuccessMessage}>
+            <span>
+              <FontAwesomeIcon style={styles.Check} icon={faCheck} />
+            </span>
+            <span style={styles.Span}>{success}</span>
+          </div>
+        )}
       </div>
 
       {ordered

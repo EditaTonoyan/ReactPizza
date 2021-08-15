@@ -83,18 +83,38 @@ export const login = (email, password, history) => (dispatch) => {
     });
 };
 
-export const order = (ordered) => (dispatch) => {
+export const order = (orderPizzas, history) => (dispatch) => {
   axios.defaults.headers.common["Authorization"] = authHeader();
   axios
     .post("https://pizza-dummy.herokuapp.com/place_order/", {
-      ordered_pizzas: ordered,
+      ordered_pizzas: orderPizzas,
     })
-    .then(
-      (response) => {},
-      (error) => {
-        console.log("error->", error.message);
+    .then(() => {
+      dispatch({
+        type: "SUCCESS_MESSAGE",
+        successMessage: "Your order has been successfully completed",
+      });
+      setTimeout(() => {
+        dispatch({ type: "RESET_PIZZAS_LIST_DATA" });
+        dispatch({ type: "RESET_DATA" });
 
-        return Promise.reject();
-      }
-    );
+        dispatch({
+          type: "SUCCESS_MESSAGE",
+          successMessage: "",
+        });
+        history.push("/");
+      }, 3000);
+    })
+    .catch(() => {
+      dispatch({
+        type: "ERROR_MESSAGE",
+        errorMessage: "Your order isn't executed",
+      });
+      setTimeout(() => {
+        dispatch({
+          type: "ERROR_MESSAGE",
+          errorMessage: "",
+        });
+      }, 3000);
+    });
 };

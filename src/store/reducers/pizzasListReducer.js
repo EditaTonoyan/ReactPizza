@@ -44,7 +44,6 @@ const pizzasListReduser = (state = initialState, action) => {
       if (typeof state.ordered[name] !== "undefined") {
         if (state.ordered[name].hasOwnProperty("count")) {
           state.orderedCount = state.orderedCount - state.ordered[name].count;
-          console.log(state.ordered[name].price);
           state.orderedPrcie =
             state.orderedPrcie - state.ordered[name].price * state.ordered[name].count;
         }
@@ -103,6 +102,11 @@ const pizzasListReduser = (state = initialState, action) => {
       };
     }
 
+    case "RESET_PIZZAS_LIST_DATA": {
+      return {
+        ...initialState,
+      };
+    }
     default:
       return state;
   }

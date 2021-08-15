@@ -38,6 +38,12 @@ const pizzasListReduser = (state = initialState, action) => {
       };
     }
 
+    case "RESET_DATA": {
+      return {
+        ...initialState,
+      };
+    }
+
     default:
       return state;
   }
