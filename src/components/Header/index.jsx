@@ -15,6 +15,8 @@ const AllPizzas = () => {
   const pizUser = JSON.parse(localStorage.getItem("pizUser"));
   const pizzas = useSelector((state) => state.pizzasListState.pizzas);
   const orderedCount = useSelector((state) => state.pizzasListState.orderedCount);
+  const newState = useSelector((state) => state.registerState);
+
   const orderedPrcie = useSelector((state) => state.pizzasListState.orderedPrcie);
   const dispatch = useDispatch();
 
@@ -58,12 +60,6 @@ const AllPizzas = () => {
             </Link>
           </div>
         )}
-        {/* <Link to="/joinus">
-          <Button style={styles.SignIn}>Join Us</Button>
-        </Link>
-        <Link to="/login">
-          <Button style={styles.SignIn}>Sign In</Button>
-        </Link> */}
       </div>
       <div style={styles.Button}>
         <div>

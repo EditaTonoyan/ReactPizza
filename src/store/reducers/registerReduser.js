@@ -18,6 +18,7 @@ const pizzasListReduser = (state = initialState, action) => {
     }
 
     case "ERROR_MESSAGE": {
+      console.log(state.errorMessage);
       return {
         ...state,
         errorMessage: action.errorMessage,
@@ -33,10 +34,10 @@ const pizzasListReduser = (state = initialState, action) => {
     case "LOGOUT": {
       localStorage.removeItem("pizUser");
       return {
-        ...state,
-        successMessage: action.successMessage,
+        ...initialState,
       };
     }
+
     default:
       return state;
   }

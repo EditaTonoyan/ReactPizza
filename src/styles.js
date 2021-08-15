@@ -362,6 +362,13 @@ const SuccessMessage = {
   backgroundColor: "#DFF2BF",
   margin: "15px 0 15px 321px",
 };
+const ErrorMessage = {
+  width: "550px",
+  disolay: "flex",
+  color: "rgb(185, 18, 18)",
+  backgroundColor: "rgb(234, 176, 176)",
+  margin: "15px 0 15px 321px",
+};
 
 const Span = {
   marginLeft: "5px",
@@ -432,6 +439,7 @@ export const styles = {
   SignIn: SignIn,
   Form: Form,
   SuccessMessage: SuccessMessage,
+  ErrorMessage: ErrorMessage,
   Span: Span,
   Check: Check,
   RegHeader: RegHeader,

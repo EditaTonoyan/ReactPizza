@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Input, Button, Checkbox } from "antd";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { styles } from "../../styles";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,9 +9,11 @@ import piceOfPizza from "../../assets/icons/piceOfPizza.png";
 import { login } from "../../store/action";
 import { useHistory } from "react-router-dom";
 
-const LogIn = (props) => {
+const LogIn = () => {
   const history = useHistory();
-  const { email, password, successMessage } = useSelector((state) => state.registerState);
+  const { email, password, successMessage, errorMessage } = useSelector(
+    (state) => state.registerState
+  );
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -24,6 +26,7 @@ const LogIn = (props) => {
     }
   };
   const success = successMessage;
+  const error = errorMessage;
 
   return (
     <>
@@ -67,6 +70,14 @@ const LogIn = (props) => {
           remember: true,
         }}
       >
+        {errorMessage && (
+          <div style={styles.ErrorMessage}>
+            <span>
+              <FontAwesomeIcon style={styles.Check} icon={faWindowClose} />
+            </span>
+            <span style={styles.Span}>{error}</span>
+          </div>
+        )}
         {successMessage && (
           <div style={styles.SuccessMessage}>
             <span>
@@ -85,7 +96,7 @@ const LogIn = (props) => {
             },
           ]}
         >
-          <Input name="email" value={email} onChange={handleChange} />
+          <Input placeholder="email" name="email" value={email} onChange={handleChange} />
         </Form.Item>
 
         <Form.Item
@@ -98,7 +109,12 @@ const LogIn = (props) => {
             },
           ]}
         >
-          <Input.Password name="password" value={password} onChange={handleChange} />
+          <Input.Password
+            placeholder="password"
+            name="password"
+            value={password}
+            onChange={handleChange}
+          />
         </Form.Item>
 
         <Form.Item

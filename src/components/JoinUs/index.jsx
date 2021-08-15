@@ -1,7 +1,7 @@
 import React from "react";
 // import "antd/dist/antd.css";
 import { Form, Input, Button, Checkbox } from "antd";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { styles } from "../../styles";
 import { register } from "../../store/action";
@@ -12,9 +12,10 @@ import { useHistory } from "react-router-dom";
 
 const JoinUs = () => {
   let history = useHistory();
-  const { firstName, lastName, email, password, successMessage } = useSelector(
+  const { firstName, lastName, email, password, successMessage, errorMessage } = useSelector(
     (state) => state.registerState
   );
+
   const dispatch = useDispatch();
 
   const onChange = (e) => {
@@ -26,6 +27,7 @@ const JoinUs = () => {
       dispatch(register(firstName, lastName, email, password, history));
     }
   };
+  const error = errorMessage;
   const success = successMessage;
   return (
     <>
@@ -71,6 +73,15 @@ const JoinUs = () => {
           remember: true,
         }}
       >
+        {errorMessage && (
+          <div style={styles.ErrorMessage}>
+            <span>
+              <FontAwesomeIcon style={styles.Check} icon={faWindowClose} />
+            </span>
+            <span style={styles.Span}>{error}</span>
+          </div>
+        )}
+
         {successMessage && (
           <div style={styles.SuccessMessage}>
             <span>
@@ -102,7 +113,7 @@ const JoinUs = () => {
             },
           ]}
         >
-          <Input name="lastName" value={lastName} onChange={onChange} />
+          <Input placeholder="lastName" name="lastName" value={lastName} onChange={onChange} />
         </Form.Item>
 
         <Form.Item
@@ -115,7 +126,7 @@ const JoinUs = () => {
             },
           ]}
         >
-          <Input name="email" value={email} onChange={onChange} />
+          <Input placeholder="email" name="email" value={email} onChange={onChange} />
         </Form.Item>
 
         <Form.Item
@@ -128,7 +139,12 @@ const JoinUs = () => {
             },
           ]}
         >
-          <Input.Password name="password" value={password} onChange={onChange} />
+          <Input.Password
+            placeholder="password"
+            name="password"
+            value={password}
+            onChange={onChange}
+          />
         </Form.Item>
 
         <Form.Item

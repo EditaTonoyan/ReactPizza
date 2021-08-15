@@ -22,24 +22,31 @@ export const register = (firstName, lastName, email, password, history) => (disp
       lastName,
       password,
     })
-    .then(
-      (response) => {
+    .then(() => {
+      dispatch({
+        type: "SUCCESS_MESSAGE",
+        successMessage: "Congratulations, your account has been successfully created!",
+      });
+      setTimeout(() => {
+        history.push("/login");
         dispatch({
           type: "SUCCESS_MESSAGE",
-          successMessage: "Congratulations, your account has been successfully created!",
+          successMessage: "",
         });
-        setTimeout(() => {
-          history.push("/login");
-        }, 2000);
-
-        return Promise.resolve();
-      },
-      (error) => {
-        console.log("error->", error.message);
-
-        return Promise.reject();
-      }
-    );
+      }, 2000);
+    })
+    .catch(() => {
+      dispatch({
+        type: "ERROR_MESSAGE",
+        errorMessage: "This email already registered or not valid",
+      });
+      setTimeout(() => {
+        dispatch({
+          type: "ERROR_MESSAGE",
+          errorMessage: "",
+        });
+      }, 3000);
+    });
 };
 
 export const login = (email, password, history) => (dispatch) => {
@@ -48,27 +55,32 @@ export const login = (email, password, history) => (dispatch) => {
       email,
       password,
     })
-    .then(
-      (response) => {
-        if (response.data.accessToken) {
-          localStorage.setItem("pizUser", JSON.stringify(response.data));
-        }
-        dispatch({
-          type: "SUCCESS_MESSAGE",
-          successMessage: "Success!",
-        });
-        setTimeout(() => {
-          history.push("/");
-        }, 2000);
-
-        return response.data;
-      },
-      (error) => {
-        console.log("error->", error.message);
-
-        return Promise.reject();
+    .then((response) => {
+      if (response.data.accessToken) {
+        localStorage.setItem("pizUser", JSON.stringify(response.data));
       }
-    );
+      dispatch({
+        type: "SUCCESS_MESSAGE",
+        successMessage: "Success!",
+      });
+      setTimeout(() => {
+        history.push("/");
+      }, 1000);
+
+      return response.data;
+    })
+    .catch(() => {
+      dispatch({
+        type: "ERROR_MESSAGE",
+        errorMessage: "Wrong  login/password combination",
+      });
+      setTimeout(() => {
+        dispatch({
+          type: "ERROR_MESSAGE",
+          errorMessage: "",
+        });
+      }, 3000);
+    });
 };
 
 export const order = (ordered) => (dispatch) => {
