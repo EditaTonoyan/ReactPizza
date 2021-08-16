@@ -65,6 +65,10 @@ export const login = (email, password, history) => (dispatch) => {
       });
       setTimeout(() => {
         history.push("/");
+        dispatch({
+          type: "SUCCESS_MESSAGE",
+          successMessage: "",
+        });
       }, 1000);
 
       return response.data;
@@ -95,13 +99,8 @@ export const order = (orderPizzas, history) => (dispatch) => {
         successMessage: "Your order has been successfully completed",
       });
       setTimeout(() => {
-        dispatch({ type: "RESET_PIZZAS_LIST_DATA" });
+        dispatch({ type: "DELETE_ALL" });
         dispatch({ type: "RESET_DATA" });
-
-        dispatch({
-          type: "SUCCESS_MESSAGE",
-          successMessage: "",
-        });
         history.push("/");
       }, 3000);
     })

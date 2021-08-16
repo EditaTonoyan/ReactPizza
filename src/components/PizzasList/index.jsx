@@ -14,6 +14,8 @@ const PizzasList = (props) => {
   const ordered = useSelector((state) => state.pizzasListState.ordered);
   const error = state.pizzasListState.error;
 
+  console.log("ordered", ordered);
+
   const dispatch = useDispatch();
 
   const addToChart = (e) => {
@@ -78,7 +80,6 @@ const PizzasList = (props) => {
                         value="1"
                         id={pizza.id}
                       >
-                        {" "}
                         +Добавит
                       </button>
                     ) : ordered[pizza.id].count > 1 ? (

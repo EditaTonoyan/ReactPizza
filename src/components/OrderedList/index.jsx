@@ -18,10 +18,14 @@ const OrderedList = () => {
   const orderedCount = useSelector((state) => state.pizzasListState.orderedCount);
   const orderedPrcie = useSelector((state) => state.pizzasListState.orderedPrcie);
   const state = useSelector((state) => state.registerState);
+  const newState = useSelector((state) => state.pizzasListState);
+  console.log("newState", newState);
+  console.log("state", state);
 
   const dispatch = useDispatch();
+
   let orderPizzas = [];
-  const pizzasList = pizzas.map((pizza) => {
+  pizzas.map((pizza) => {
     if (ordered[pizza.id]) {
       orderPizzas = [
         {
