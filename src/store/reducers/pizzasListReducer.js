@@ -43,6 +43,7 @@ const pizzasListReduser = (state = initialState, action) => {
 
         case 'ON_CHANGE': {
             const { name, value } = action.target;
+            // istead of typeof state.ordered[name] !== 'undefined' you can write if (state.ordered[name])
             if (typeof state.ordered[name] !== 'undefined') {
                 if (state.ordered[name].hasOwnProperty('count')) {
                     state.orderedCount = state.orderedCount - state.ordered[name].count;

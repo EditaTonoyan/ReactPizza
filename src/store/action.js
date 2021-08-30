@@ -1,6 +1,8 @@
 import axios from 'axios';
 import authHeader from '../helpers/authHeader';
 
+// this file should be contain only ajax requests, dispatch, navigate should be done into your component
+
 export const getAllPizzas = (data) => (dispatch) => {
     axios
         .get('https://pizza-dummy.herokuapp.com/pizzas/')
