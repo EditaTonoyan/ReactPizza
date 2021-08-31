@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, Input, Button, Checkbox } from "antd";
 import { faCheck, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,13 +11,16 @@ import { useHistory } from "react-router-dom";
 
 const LogIn = () => {
   const history = useHistory();
-  const { email, password, successMessage, errorMessage } = useSelector(
+
+  const { email, password, successMessage, errorMessage, isLoggedIn } = useSelector(
     (state) => state.registerState
   );
   const dispatch = useDispatch();
 
-  const handleChange = (e) => {
-    dispatch({ type: "ON_CHANGE", target: e.target });
+  console.log("login", isLoggedIn);
+
+  const handleChange = (name, value) => {
+    dispatch({ type: "ON_CHANGE1", name, value });
   };
 
   const onClickLogin = () => {
@@ -25,6 +28,7 @@ const LogIn = () => {
       dispatch(login(email, password, history));
     }
   };
+
   const success = successMessage;
   const error = errorMessage;
 
@@ -78,6 +82,7 @@ const LogIn = () => {
             <span style={styles.Span}>{error}</span>
           </div>
         )}
+
         {successMessage && (
           <div style={styles.SuccessMessage}>
             <span>
@@ -86,6 +91,7 @@ const LogIn = () => {
             <span style={styles.Span}>{success}</span>
           </div>
         )}
+
         <Form.Item
           name="email"
           label="Email"
@@ -96,7 +102,7 @@ const LogIn = () => {
             },
           ]}
         >
-          <Input placeholder="email" name="email" value={email} onChange={handleChange} />
+          <Input placeholder="email" onChange={(e) => handleChange("email", e.target.value)} />
         </Form.Item>
 
         <Form.Item
@@ -111,9 +117,7 @@ const LogIn = () => {
         >
           <Input.Password
             placeholder="password"
-            name="password"
-            value={password}
-            onChange={handleChange}
+            onChange={(e) => handleChange("password", e.target.value)}
           />
         </Form.Item>
 

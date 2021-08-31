@@ -10,20 +10,19 @@ const sizes = {
 
 const PizzasList = (props) => {
   const pizzas = props.pizzas;
+
   const state = useSelector((state) => state);
   const ordered = useSelector((state) => state.pizzasListState.ordered);
   const error = state.pizzasListState.error;
 
-  console.log("ordered", ordered);
-
   const dispatch = useDispatch();
 
-  const addToChart = (e) => {
-    dispatch({ type: "ADD_TO_CHART", target: e.target });
+  const addToChart = (id, value) => {
+    dispatch({ type: "ADD_TO_CHART", id, value });
   };
 
-  const onChange = (e) => {
-    dispatch({ type: "ON_CHANGE", target: e.target });
+  const onChange = (name, value) => {
+    dispatch({ type: "ON_CHANGE", name, value });
   };
 
   return (
@@ -55,7 +54,7 @@ const PizzasList = (props) => {
                       return (
                         <label key={index} className={style.paragraph}>
                           <input
-                            onClick={onChange}
+                            onClick={() => onChange(pizza.id, pizza[size])}
                             name={pizza.id}
                             type="radio"
                             value={pizza[size]}
@@ -73,44 +72,20 @@ const PizzasList = (props) => {
                   </div>
                   {ordered[pizza.id] ? (
                     ordered[pizza.id].count === 1 ? (
-                      <button
-                        onClick={addToChart}
-                        style={styles.AddButton1}
-                        name={`count_${pizza.id}`}
-                        value="1"
-                        id={pizza.id}
-                      >
+                      <button onClick={() => addToChart(pizza.id, 1)} style={styles.AddButton1}>
                         +Добавит
                       </button>
                     ) : ordered[pizza.id].count > 1 ? (
-                      <button
-                        onClick={addToChart}
-                        style={styles.AddButton}
-                        name={`count_${pizza.id}`}
-                        value="1"
-                        id={pizza.id}
-                      >
+                      <button onClick={() => addToChart(pizza.id, 1)} style={styles.AddButton}>
                         +Добавит {ordered[pizza.id].count}
                       </button>
                     ) : (
-                      <button
-                        onClick={addToChart}
-                        style={styles.AddButton}
-                        name={`count_${pizza.id}`}
-                        value="1"
-                        id={pizza.id}
-                      >
+                      <button onClick={() => addToChart(pizza.id, 1)} style={styles.AddButton}>
                         +Добавит
                       </button>
                     )
                   ) : (
-                    <button
-                      onClick={addToChart}
-                      style={styles.AddButton}
-                      name={`count_${pizza.id}`}
-                      value="1"
-                      id={pizza.id}
-                    >
+                    <button onClick={() => addToChart(pizza.id, 1)} style={styles.AddButton}>
                       +Добавит
                     </button>
                   )}

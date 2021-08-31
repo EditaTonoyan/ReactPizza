@@ -13,14 +13,13 @@ const EmptyChart = (props) => {
             <div style={styles.Row1}>
               <img style={styles.PiceOfPizza} src={piceOfPizza} alt="icon" />
               <h1 style={styles.H1}>
-                {" "}
                 <a style={styles.TitleLink} href="#">
                   REACT PIZZA
                 </a>
               </h1>
             </div>
+
             <h4>
-              {" "}
               <a style={styles.H4} href="#">
                 Самая реактивная пицца
               </a>
@@ -32,6 +31,7 @@ const EmptyChart = (props) => {
       <hr style={styles.Hr} />
 
       <h1 style={styles.ChartIsEmpty}>Корзина пустая 😕</h1>
+
       <p style={styles.Text}>
         Вероятней всего, вы не заказывали ещё пиццу. <br />
         Для того, чтобы заказать пиццу, перейди на главную страницу.

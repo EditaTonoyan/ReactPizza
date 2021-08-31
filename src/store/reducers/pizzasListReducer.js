@@ -14,10 +14,12 @@ const pizzasListReduser = (state = initialState, action) => {
     }
 
     case "ADD_TO_CHART": {
-      const { id, value } = action.target;
-      if (state.ordered.hasOwnProperty(id)) {
-        if (state.ordered[id].hasOwnProperty("price")) {
-          if (state.ordered[id].hasOwnProperty("count")) {
+      const { id, value } = action;
+      const ordered = state.ordered[id];
+
+      if (ordered) {
+        if (ordered.price) {
+          if (state.ordered[id].count) {
             state.ordered[id].count += parseInt(value);
           } else {
             state.ordered[id].count = parseInt(value);
@@ -40,9 +42,10 @@ const pizzasListReduser = (state = initialState, action) => {
     }
 
     case "ON_CHANGE": {
-      const { name, value } = action.target;
-      if (typeof state.ordered[name] !== "undefined") {
-        if (state.ordered[name].hasOwnProperty("count")) {
+      const { name, value } = action;
+      console.log(state.ordered?.name);
+      if (state.ordered?.name) {
+        if (state.ordered[name]?.count) {
           state.orderedCount = state.orderedCount - state.ordered[name].count;
           state.orderedPrcie =
             state.orderedPrcie - state.ordered[name].price * state.ordered[name].count;
@@ -50,7 +53,7 @@ const pizzasListReduser = (state = initialState, action) => {
       }
 
       state.ordered[name] = { price: value };
-      if (state.error.hasOwnProperty(name)) {
+      if (state.error?.name) {
         delete state.error[name];
       }
 
@@ -62,7 +65,9 @@ const pizzasListReduser = (state = initialState, action) => {
     }
 
     case "CHANGE_COUNT": {
-      const { name, value } = action.target;
+      const { name, value } = action;
+      console.log("name", name);
+      console.log("value", value);
       if (value === "plus") {
         state.ordered[name].count = state.ordered[name].count + 1;
         state.orderedCount = state.orderedCount + 1;
@@ -82,7 +87,7 @@ const pizzasListReduser = (state = initialState, action) => {
     }
 
     case "DELETE_PIZZA": {
-      const { name } = action.target;
+      const { name } = action;
       const { [name]: remove, ...rest } = state.ordered;
       state.orderedCount = state.orderedCount - state.ordered[name].count;
       state.orderedPrcie =

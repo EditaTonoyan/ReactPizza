@@ -5,12 +5,12 @@ const initialState = {
   password: "",
   successMessage: "",
   errorMessage: "",
+  isLoggedIn: false,
 };
 const pizzasListReduser = (state = initialState, action) => {
   switch (action.type) {
-    case "ON_CHANGE": {
-      const { name, value } = action.target;
-
+    case "ON_CHANGE1": {
+      const { name, value } = action;
       return {
         ...state,
         [name]: value,
@@ -18,7 +18,6 @@ const pizzasListReduser = (state = initialState, action) => {
     }
 
     case "ERROR_MESSAGE": {
-      console.log(state.errorMessage);
       return {
         ...state,
         errorMessage: action.errorMessage,
@@ -41,6 +40,12 @@ const pizzasListReduser = (state = initialState, action) => {
     case "RESET_DATA": {
       return {
         ...initialState,
+      };
+    }
+    case "IS_LOGGED_IN": {
+      return {
+        ...state,
+        isLoggedIn: action.isLoggedIn,
       };
     }
 

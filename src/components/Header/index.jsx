@@ -6,23 +6,27 @@ import { useEffect } from "react";
 import { getAllPizzas } from "../../store/action";
 import { Link } from "react-router-dom";
 import { Button, Menu } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 import piceOfPizza from "../../assets/icons/piceOfPizza.png";
 import Menu1 from "../Menu";
 import PizzasList from "../PizzasList";
-import { UserOutlined } from "@ant-design/icons";
+
 const { SubMenu } = Menu;
+
 const AllPizzas = () => {
   const pizUser = JSON.parse(localStorage.getItem("pizUser"));
   const pizzas = useSelector((state) => state.pizzasListState.pizzas);
   const orderedCount = useSelector((state) => state.pizzasListState.orderedCount);
   const newState = useSelector((state) => state.registerState);
-
   const orderedPrcie = useSelector((state) => state.pizzasListState.orderedPrcie);
+
   const dispatch = useDispatch();
 
   const logout = () => {
-    dispatch({ type: "LOGOUT", successMessage: "kkkk" });
+    dispatch({ type: "LOGOUT", successMessage: "success!!!!" });
+    dispatch({ type: "IS_LOGGED_IN", isLoggedIn: false });
   };
+
   useEffect(() => {
     dispatch(getAllPizzas());
   }, [dispatch]);

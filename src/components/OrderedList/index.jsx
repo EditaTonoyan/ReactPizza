@@ -3,24 +3,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { styles } from "../../styles";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
+import { order } from "../../store/action";
+import { useHistory } from "react-router-dom";
 import { faCheck, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import piceOfPizza from "../../assets/icons/piceOfPizza.png";
 import trash from "../../assets/icons/trash.svg";
 import EmptyChart from "../EmptyChart";
-import { order } from "../../store/action";
-import { useHistory } from "react-router-dom";
 
 const OrderedList = () => {
   const history = useHistory();
+
   const pizzas = useSelector((state) => state.pizzasListState.pizzas);
   const ordered = useSelector((state) => state.pizzasListState.ordered);
   const orderedCount = useSelector((state) => state.pizzasListState.orderedCount);
   const orderedPrcie = useSelector((state) => state.pizzasListState.orderedPrcie);
   const state = useSelector((state) => state.registerState);
   const newState = useSelector((state) => state.pizzasListState);
-  console.log("newState", newState);
-  console.log("state", state);
 
   const dispatch = useDispatch();
 
@@ -41,12 +40,12 @@ const OrderedList = () => {
     dispatch(order(orderPizzas, history));
   };
 
-  const changeCount = (e) => {
-    dispatch({ type: "CHANGE_COUNT", target: e.target });
+  const changeCount = (name, value) => {
+    dispatch({ type: "CHANGE_COUNT", name, value });
   };
 
-  const deletePizza = (e) => {
-    dispatch({ type: "DELETE_PIZZA", target: e.target });
+  const deletePizza = (name) => {
+    dispatch({ type: "DELETE_PIZZA", name });
   };
 
   const deleteAll = () => {
@@ -126,13 +125,13 @@ const OrderedList = () => {
                     <p style={styles.PizzaName}> {pizzas[pizzasKey].name}</p>
                   </div>
                   <div style={styles.OrderedInfo}>
-                    <button onClick={changeCount} name={key} value="minus" style={styles.Incdec}>
+                    <button onClick={() => changeCount(key, "minus")} style={styles.Incdec}>
                       -
                     </button>
 
                     <span style={styles.OrderedCount}>{ordered[key].count}</span>
 
-                    <button onClick={changeCount} name={key} value="plus" style={styles.Incdec}>
+                    <button onClick={() => changeCount(key, "plus")} style={styles.Incdec}>
                       +
                     </button>
                   </div>
@@ -142,7 +141,7 @@ const OrderedList = () => {
                   </div>
 
                   <div style={styles.OrderedInfo}>
-                    <button onClick={deletePizza} name={key} style={styles.DeleteButton}>
+                    <button onClick={() => deletePizza(key)} style={styles.DeleteButton}>
                       x
                     </button>
                   </div>

@@ -391,6 +391,7 @@ const User = {
 };
 
 const Check = { margin: "0" };
+
 export const styles = {
   PiceOfPizza: PiceOfPizza,
   Hr: Hr,

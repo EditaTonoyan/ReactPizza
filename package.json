@@ -12,6 +12,7 @@
     "antd": "^4.16.8",
     "axios": "^0.21.1",
     "bootstrap": "^5.1.0",
+    "dotenv": "^10.0.0",
     "font-awesome": "^4.7.0",
     "intd": "^0.1.4",
     "mobx-react-lite": "^3.2.0",
