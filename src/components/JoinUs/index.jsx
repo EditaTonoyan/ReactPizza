@@ -15,7 +15,6 @@ const JoinUs = () => {
   const { firstName, lastName, email, password, successMessage, errorMessage } = useSelector(
     (state) => state.registerState
   );
-  console.log(firstName);
   const dispatch = useDispatch();
 
   const onChange = (name, value) => {
@@ -28,6 +27,8 @@ const JoinUs = () => {
     }
   };
 
+  console.log("firstName", firstName);
+  console.log("lastName", lastName);
   const error = errorMessage;
   const success = successMessage;
 

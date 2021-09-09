@@ -23,7 +23,6 @@ export const register = (firstName, lastName, email, password, history) => (disp
       password,
     })
     .then((res) => {
-      console.log("res", res);
       dispatch({
         type: "SUCCESS_MESSAGE",
         successMessage: "Congratulations, your account has been successfully created!",
@@ -65,7 +64,7 @@ export const login = (email, password, history) => (dispatch) => {
         successMessage: "Success!",
       });
       dispatch({ type: "IS_LOGGED_IN", isLoggedIn: true });
-      localStorage.setItem("isLoggedIn", "1");
+      // localStorage.setItem("isLoggedIn", "1");
       setTimeout(() => {
         history.push("/");
         dispatch({

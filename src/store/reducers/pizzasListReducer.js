@@ -43,7 +43,6 @@ const pizzasListReduser = (state = initialState, action) => {
 
     case "ON_CHANGE": {
       const { name, value } = action;
-      console.log(state.ordered?.name);
       if (state.ordered?.name) {
         if (state.ordered[name]?.count) {
           state.orderedCount = state.orderedCount - state.ordered[name].count;
@@ -66,8 +65,6 @@ const pizzasListReduser = (state = initialState, action) => {
 
     case "CHANGE_COUNT": {
       const { name, value } = action;
-      console.log("name", name);
-      console.log("value", value);
       if (value === "plus") {
         state.ordered[name].count = state.ordered[name].count + 1;
         state.orderedCount = state.orderedCount + 1;

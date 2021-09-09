@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, combineReducers } from "redux";
+import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import pizzasListReduser from "./reducers/pizzasListReducer";
 import thunk from "redux-thunk";
 import registerReduser from "./reducers/registerReduser";
@@ -8,6 +8,5 @@ const reduser = combineReducers({
   registerState: registerReduser,
 });
 
-const store = createStore(reduser, applyMiddleware(thunk));
-
+const store = createStore(reduser, compose(applyMiddleware(thunk)));
 export default store;

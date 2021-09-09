@@ -23,6 +23,7 @@ const pizzasListReduser = (state = initialState, action) => {
         errorMessage: action.errorMessage,
       };
     }
+
     case "SUCCESS_MESSAGE": {
       return {
         ...state,
@@ -42,6 +43,7 @@ const pizzasListReduser = (state = initialState, action) => {
         ...initialState,
       };
     }
+
     case "IS_LOGGED_IN": {
       return {
         ...state,

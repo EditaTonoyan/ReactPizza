@@ -12,12 +12,17 @@ import { useHistory } from "react-router-dom";
 const LogIn = () => {
   const history = useHistory();
 
-  const { email, password, successMessage, errorMessage, isLoggedIn } = useSelector(
+  const { email, password, successMessage, errorMessage } = useSelector(
     (state) => state.registerState
   );
   const dispatch = useDispatch();
+  const checkIsLoggedIn = localStorage.getItem("pizUser");
 
-  console.log("login", isLoggedIn);
+  useEffect(() => {
+    if (checkIsLoggedIn) {
+      dispatch({ type: "IS_LOGGED_IN", isLoggedIn: true });
+    }
+  }, [checkIsLoggedIn, history, dispatch]);
 
   const handleChange = (name, value) => {
     dispatch({ type: "ON_CHANGE1", name, value });
