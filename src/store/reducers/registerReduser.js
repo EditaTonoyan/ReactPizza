@@ -9,8 +9,9 @@ const initialState = {
 };
 const pizzasListReduser = (state = initialState, action) => {
   switch (action.type) {
-    case "ON_CHANGE1": {
+    case "ON_CHANGE": {
       const { name, value } = action;
+
       return {
         ...state,
         [name]: value,
@@ -37,17 +38,15 @@ const pizzasListReduser = (state = initialState, action) => {
         ...initialState,
       };
     }
-
-    case "RESET_DATA": {
-      return {
-        ...initialState,
-      };
-    }
-
     case "IS_LOGGED_IN": {
       return {
         ...state,
         isLoggedIn: action.isLoggedIn,
+      };
+    }
+    case "RESET_DATA": {
+      return {
+        ...initialState,
       };
     }
 

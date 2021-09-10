@@ -16,13 +16,13 @@ export const getAllPizzas = (data) => (dispatch) => {
 
 export const register = (firstName, lastName, email, password, history) => (dispatch) => {
   axios
-    .post("/auth/registration/", {
+    .post("https://pizza-dummy.herokuapp.com/auth/registration/", {
       email,
       firstName,
       lastName,
       password,
     })
-    .then((res) => {
+    .then((data) => {
       dispatch({
         type: "SUCCESS_MESSAGE",
         successMessage: "Congratulations, your account has been successfully created!",
@@ -35,7 +35,7 @@ export const register = (firstName, lastName, email, password, history) => (disp
         });
       }, 2000);
     })
-    .catch(() => {
+    .catch((error) => {
       dispatch({
         type: "ERROR_MESSAGE",
         errorMessage: "This email already registered or not valid",
@@ -43,7 +43,7 @@ export const register = (firstName, lastName, email, password, history) => (disp
       setTimeout(() => {
         dispatch({
           type: "ERROR_MESSAGE",
-          errorMessage: "",
+          errorMessage: error.messages,
         });
       }, 3000);
     });
@@ -63,8 +63,6 @@ export const login = (email, password, history) => (dispatch) => {
         type: "SUCCESS_MESSAGE",
         successMessage: "Success!",
       });
-      dispatch({ type: "IS_LOGGED_IN", isLoggedIn: true });
-      // localStorage.setItem("isLoggedIn", "1");
       setTimeout(() => {
         history.push("/");
         dispatch({

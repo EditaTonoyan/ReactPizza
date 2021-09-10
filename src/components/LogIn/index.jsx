@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Form, Input, Button, Checkbox } from "antd";
 import { faCheck, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,21 +11,13 @@ import { useHistory } from "react-router-dom";
 
 const LogIn = () => {
   const history = useHistory();
-
   const { email, password, successMessage, errorMessage } = useSelector(
     (state) => state.registerState
   );
   const dispatch = useDispatch();
-  const checkIsLoggedIn = localStorage.getItem("pizUser");
-
-  useEffect(() => {
-    if (checkIsLoggedIn) {
-      dispatch({ type: "IS_LOGGED_IN", isLoggedIn: true });
-    }
-  }, [checkIsLoggedIn, history, dispatch]);
 
   const handleChange = (name, value) => {
-    dispatch({ type: "ON_CHANGE1", name, value });
+    dispatch({ type: "ON_CHANGE", name, value });
   };
 
   const onClickLogin = () => {
@@ -33,7 +25,6 @@ const LogIn = () => {
       dispatch(login(email, password, history));
     }
   };
-
   const success = successMessage;
   const error = errorMessage;
 
@@ -87,7 +78,6 @@ const LogIn = () => {
             <span style={styles.Span}>{error}</span>
           </div>
         )}
-
         {successMessage && (
           <div style={styles.SuccessMessage}>
             <span>
@@ -96,7 +86,6 @@ const LogIn = () => {
             <span style={styles.Span}>{success}</span>
           </div>
         )}
-
         <Form.Item
           name="email"
           label="Email"

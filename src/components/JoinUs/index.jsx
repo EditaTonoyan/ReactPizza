@@ -1,4 +1,5 @@
 import React from "react";
+// import "antd/dist/antd.css";
 import { Form, Input, Button, Checkbox } from "antd";
 import { faCheck, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,19 +7,19 @@ import { styles } from "../../styles";
 import { register } from "../../store/action";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
 import piceOfPizza from "../../assets/icons/piceOfPizza.png";
+import { useHistory } from "react-router-dom";
 
 const JoinUs = () => {
   let history = useHistory();
-
   const { firstName, lastName, email, password, successMessage, errorMessage } = useSelector(
     (state) => state.registerState
   );
+
   const dispatch = useDispatch();
 
   const onChange = (name, value) => {
-    dispatch({ type: "ON_CHANGE1", name, value });
+    dispatch({ type: "ON_CHANGE", name, value });
   };
 
   const handleRegister = () => {
@@ -26,12 +27,8 @@ const JoinUs = () => {
       dispatch(register(firstName, lastName, email, password, history));
     }
   };
-
-  console.log("firstName", firstName);
-  console.log("lastName", lastName);
   const error = errorMessage;
   const success = successMessage;
-
   return (
     <>
       <div>
@@ -103,16 +100,11 @@ const JoinUs = () => {
             },
           ]}
         >
-          <Input
-            placeholder="firstName"
-            name="firstName"
-            value={firstName}
-            onChange={() => onChange("firstName", firstName)}
-          />
+          <Input placeholder="firstName" onChange={(e) => onChange("firstName", e.target.value)} />
         </Form.Item>
 
         <Form.Item
-          name="LastName"
+          name="lastName"
           label="LastName"
           rules={[
             {
@@ -121,12 +113,7 @@ const JoinUs = () => {
             },
           ]}
         >
-          <Input
-            placeholder="lastName"
-            onChange={(e) => {
-              onChange("lastName", e.target.value);
-            }}
-          />
+          <Input placeholder="lastName" onChange={(e) => onChange("lastName", e.target.value)} />
         </Form.Item>
 
         <Form.Item
@@ -139,12 +126,7 @@ const JoinUs = () => {
             },
           ]}
         >
-          <Input
-            placeholder="email"
-            onChange={(e) => {
-              onChange("email", e.target.value);
-            }}
-          />
+          <Input placeholder="email" onChange={(e) => onChange("email", e.target.value)} />
         </Form.Item>
 
         <Form.Item
@@ -159,9 +141,7 @@ const JoinUs = () => {
         >
           <Input.Password
             placeholder="password"
-            onChange={(e) => {
-              onChange("password", e.target.value);
-            }}
+            onChange={(e) => onChange("password", e.target.value)}
           />
         </Form.Item>
 
