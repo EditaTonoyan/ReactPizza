@@ -25,6 +25,7 @@ const LogIn = () => {
       dispatch(login(email, password, history));
     }
   };
+
   const success = successMessage;
   const error = errorMessage;
 
