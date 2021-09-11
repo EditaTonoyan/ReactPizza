@@ -1,30 +1,31 @@
-import './App.css';
-import AllPizzas from './components/Header';
-import Chart from './components/Chart';
-import JoinUs from './components/JoinUs';
-import LogIn from './components/LogIn';
-import { Route, Switch } from 'react-router-dom';
+import "./App.css";
+import AllPizzas from "./components/Header";
+import Chart from "./components/Chart";
+import JoinUs from "./components/JoinUs";
+import LogIn from "./components/LogIn";
+import { Route, Switch } from "react-router-dom";
+import { unprotectedRoute } from "./components/protected.route";
 
 function App() {
-    return (
-        <div>
-            <Switch>
-                <Route exact path='/'>
-                    <AllPizzas />
-                </Route>
-                <Route exact path='/chart'>
-                    <Chart />
-                </Route>
-                <Route exact path='/joinus'>
-                    <JoinUs />
-                </Route>
-                {/* This route should be not acceptible when user logged in, wrap it into unprotectedRoute function (const UnprotectedSignIn = unprotectedRoute(LogIn)) see belowe */}
-                <Route exact path='/login'>
-                    <LogIn />
-                </Route>
-            </Switch>
-        </div>
-    );
+  const UnprotectedSignIn = unprotectedRoute(LogIn);
+  return (
+    <div>
+      <Switch>
+        <Route exact path="/">
+          <AllPizzas />
+        </Route>
+        <Route exact path="/chart">
+          <Chart />
+        </Route>
+        <Route exact path="/joinus">
+          <JoinUs />
+        </Route>
+        <UnprotectedSignIn exact path="/login">
+          <LogIn />
+        </UnprotectedSignIn>
+      </Switch>
+    </div>
+  );
 }
 
 export default App;

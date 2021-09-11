@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, Input, Button, Checkbox } from "antd";
 import { faCheck, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,6 +14,8 @@ const LogIn = () => {
   const { email, password, successMessage, errorMessage } = useSelector(
     (state) => state.registerState
   );
+
+  const checkToken = localStorage.getItem("pizUser");
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -26,6 +28,11 @@ const LogIn = () => {
     }
   };
 
+  useEffect(() => {
+    if (checkToken) {
+      dispatch({ type: "IS_LOGGED_IN", isLoggedIn: true });
+    }
+  }, [checkToken, dispatch]);
   const success = successMessage;
   const error = errorMessage;
 

@@ -5,6 +5,7 @@ const initialState = {
   password: "",
   successMessage: "",
   errorMessage: "",
+  isLoggedIn: false,
 };
 const pizzasListReduser = (state = initialState, action) => {
   switch (action.type) {
@@ -18,7 +19,6 @@ const pizzasListReduser = (state = initialState, action) => {
     }
 
     case "ERROR_MESSAGE": {
-      console.log(state.errorMessage);
       return {
         ...state,
         errorMessage: action.errorMessage,
@@ -35,6 +35,12 @@ const pizzasListReduser = (state = initialState, action) => {
       localStorage.removeItem("pizUser");
       return {
         ...initialState,
+      };
+    }
+    case "IS_LOGGED_IN": {
+      return {
+        ...state,
+        isLoggedIn: action.isLoggedIn,
       };
     }
 
