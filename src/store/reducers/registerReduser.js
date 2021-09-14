@@ -9,6 +9,7 @@ const initialState = {
 };
 const pizzasListReduser = (state = initialState, action) => {
   switch (action.type) {
+    //այստեղ setState եմ անում
     case "ONCHANGE": {
       const { name, value } = action;
       return {
