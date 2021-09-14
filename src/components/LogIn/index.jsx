@@ -18,8 +18,8 @@ const LogIn = () => {
   const checkToken = localStorage.getItem("pizUser");
   const dispatch = useDispatch();
 
-  const handleChange = (e) => {
-    dispatch({ type: "ON_CHANGE", target: e.target });
+  const handleChange = (name, value) => {
+    dispatch({ type: "ONCHANGE", name, value });
   };
 
   const onClickLogin = () => {
@@ -33,6 +33,7 @@ const LogIn = () => {
       dispatch({ type: "IS_LOGGED_IN", isLoggedIn: true });
     }
   }, [checkToken, dispatch]);
+
   const success = successMessage;
   const error = errorMessage;
 
@@ -104,7 +105,7 @@ const LogIn = () => {
             },
           ]}
         >
-          <Input placeholder="email" name="email" value={email} onChange={handleChange} />
+          <Input placeholder="email" onChange={(e) => handleChange("email", e.target.value)} />
         </Form.Item>
 
         <Form.Item
@@ -119,9 +120,7 @@ const LogIn = () => {
         >
           <Input.Password
             placeholder="password"
-            name="password"
-            value={password}
-            onChange={handleChange}
+            onChange={(e) => handleChange("password", e.target.value)}
           />
         </Form.Item>
 

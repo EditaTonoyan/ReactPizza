@@ -12,14 +12,15 @@ import { useHistory } from "react-router-dom";
 
 const JoinUs = () => {
   let history = useHistory();
+  //registerState-ից default արժեքները գալիս են
   const { firstName, lastName, email, password, successMessage, errorMessage } = useSelector(
     (state) => state.registerState
   );
 
   const dispatch = useDispatch();
 
-  const onChange = (e) => {
-    dispatch({ type: "ON_CHANGE", target: e.target });
+  const onChange = (name, value) => {
+    dispatch({ type: "ONCHANGE", name, value });
   };
 
   const handleRegister = () => {
@@ -100,7 +101,15 @@ const JoinUs = () => {
             },
           ]}
         >
-          <Input placeholder="firstName" name="firstName" value={firstName} onChange={onChange} />
+          <Input
+            placeholder="firstName"
+            value={firstName} //սկզբից input-ում երևալու է state-ից եկած default արժեքը(դատարկ string)
+            onChange={(e) => onChange("firstName", e.target.value)}
+            //onChange-ի ժամանակ որպես արգումենտ ուղարկում եմ name("firstname"),value-ն(input -ի մեջ գրվածը`e.target.value),
+            //եթե e.target.value-ի փոխարեն նորից դնում եմ registerState-ի firstName-ը, ստացվում ա, որ որպես արգումենտ
+            //էլի ուղարկում եմ դատարկ string, (//onChange={() => onChange("firstName",firstName)})
+          />
+          />
         </Form.Item>
 
         <Form.Item
@@ -113,7 +122,11 @@ const JoinUs = () => {
             },
           ]}
         >
-          <Input placeholder="lastName" name="lastName" value={lastName} onChange={onChange} />
+          <Input
+            placeholder="lastName"
+            value={lastName}
+            onChange={(e) => onChange("lastName", e.target.value)}
+          />
         </Form.Item>
 
         <Form.Item
@@ -126,7 +139,11 @@ const JoinUs = () => {
             },
           ]}
         >
-          <Input placeholder="email" name="email" value={email} onChange={onChange} />
+          <Input
+            placeholder="email"
+            value={email}
+            onChange={(e) => onChange("email", e.target.value)}
+          />
         </Form.Item>
 
         <Form.Item
@@ -141,9 +158,8 @@ const JoinUs = () => {
         >
           <Input.Password
             placeholder="password"
-            name="password"
             value={password}
-            onChange={onChange}
+            onChange={(e) => onChange("password", e.target.value)}
           />
         </Form.Item>
 

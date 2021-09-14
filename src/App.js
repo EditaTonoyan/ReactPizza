@@ -29,17 +29,3 @@ function App() {
 }
 
 export default App;
-
-// function unprotectedRoute(Component: ComponentType) {
-//     return () => {
-//         const [userLoggedIn, setUserLoggedIn] = useState(false);
-
-//         useEffect(() => {
-//             if (userLoggedIn) {
-//                 history.push('/')
-//             }
-//         }, [userLoggedIn]);
-
-//         return <Component />;
-//     };
-// }
