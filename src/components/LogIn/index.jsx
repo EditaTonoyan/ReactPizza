@@ -15,24 +15,17 @@ const LogIn = () => {
     (state) => state.registerState
   );
 
-  const checkToken = localStorage.getItem("pizUser");
   const dispatch = useDispatch();
 
   const handleChange = (name, value) => {
     dispatch({ type: "ONCHANGE", name, value });
   };
 
-  const onClickLogin = () => {
+  const onClickLogin = (values) => {
     if (email && password) {
-      dispatch(login(email, password, history));
+      dispatch(login({ ...values }));
     }
   };
-
-  useEffect(() => {
-    if (checkToken) {
-      dispatch({ type: "IS_LOGGED_IN", isLoggedIn: true });
-    }
-  }, [checkToken, dispatch]);
 
   const success = successMessage;
   const error = errorMessage;
@@ -77,7 +70,10 @@ const LogIn = () => {
         }}
         initialValues={{
           remember: true,
+          password: "",
         }}
+        onFinish={onClickLogin}
+        onFieldsChange={([{ name = [], value }]) => handleChange(name[0], value)}
       >
         {errorMessage && (
           <div style={styles.ErrorMessage}>
@@ -105,7 +101,7 @@ const LogIn = () => {
             },
           ]}
         >
-          <Input placeholder="email" onChange={(e) => handleChange("email", e.target.value)} />
+          <Input placeholder="email" />
         </Form.Item>
 
         <Form.Item
@@ -118,10 +114,7 @@ const LogIn = () => {
             },
           ]}
         >
-          <Input.Password
-            placeholder="password"
-            onChange={(e) => handleChange("password", e.target.value)}
-          />
+          <Input.Password placeholder="password" />
         </Form.Item>
 
         <Form.Item
@@ -141,7 +134,7 @@ const LogIn = () => {
             span: 16,
           }}
         >
-          <Button onClick={onClickLogin} type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit">
             Sign In
           </Button>
         </Form.Item>

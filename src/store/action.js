@@ -1,9 +1,9 @@
-import axios from "axios";
 import authHeader from "../helpers/authHeader";
+import { axiosInstance } from "helpers/api";
 
 export const getAllPizzas = (data) => (dispatch) => {
-  axios
-    .get("https://pizza-dummy.herokuapp.com/pizzas/")
+  axiosInstance
+    .get("/pizzas/")
     .then((res) => {
       if (res.error) throw res.error;
       data = res.data;
@@ -14,83 +14,75 @@ export const getAllPizzas = (data) => (dispatch) => {
     });
 };
 
-export const register = (firstName, lastName, email, password, history) => (dispatch) => {
-  axios
-    .post("https://pizza-dummy.herokuapp.com/auth/registration/", {
-      email,
-      firstName,
-      lastName,
-      password,
-    })
-    .then((data) => {
-      dispatch({
-        type: "SUCCESS_MESSAGE",
-        successMessage: "Congratulations, your account has been successfully created!",
-      });
-      setTimeout(() => {
-        history.push("/login");
+export const register =
+  ({ firstName, lastName, email, password, history }) =>
+  (dispatch) => {
+    axiosInstance
+      .post("/auth/registration/", {
+        email,
+        firstName,
+        lastName,
+        password,
+      })
+      .then((data) => {
         dispatch({
           type: "SUCCESS_MESSAGE",
-          successMessage: "",
+          successMessage: "Congratulations, your account has been successfully created!",
         });
-      }, 2000);
-    })
-    .catch((error) => {
-      dispatch({
-        type: "ERROR_MESSAGE",
-        errorMessage: "This email already registered or not valid",
-      });
-      setTimeout(() => {
+      })
+      .catch((error) => {
         dispatch({
           type: "ERROR_MESSAGE",
-          errorMessage: error.messages,
+          errorMessage: "This email already registered or not valid",
         });
-      }, 3000);
-    });
+      });
+  };
+
+export const setUser = () => (dispatch) => {
+  axiosInstance.defaults.headers.common["Authorization"] = authHeader();
+  axiosInstance.get("/auth/user/").then((res) => {
+    dispatch({ type: "SET_USER", user: res.data, isLoggedIn: true });
+  });
 };
 
-export const login = (email, password, history) => (dispatch) => {
-  axios
-    .post("https://pizza-dummy.herokuapp.com/auth/login/", {
-      email,
-      password,
-    })
-    .then((response) => {
-      if (response.data.accessToken) {
-        localStorage.setItem("pizUser", JSON.stringify(response.data));
-      }
-      dispatch({
-        type: "SUCCESS_MESSAGE",
-        successMessage: "Success!",
-      });
-      setTimeout(() => {
-        history.push("/");
+export const login =
+  ({ email, password }) =>
+  (dispatch) => {
+    axiosInstance
+      .post("/auth/login/", {
+        email,
+        password,
+      })
+      .then((response) => {
+        console.log("data", response.data.user);
+        if (response.data.accessToken) {
+          localStorage.setItem("accessToken", response.data.accessToken);
+        }
         dispatch({
           type: "SUCCESS_MESSAGE",
-          successMessage: "",
+          successMessage: "Success!",
         });
-      }, 1000);
 
-      return response.data;
-    })
-    .catch(() => {
-      dispatch({
-        type: "ERROR_MESSAGE",
-        errorMessage: "Wrong  login/password combination",
-      });
-      setTimeout(() => {
+        dispatch({
+          type: "IS_LOGGED_IN",
+          user: response.data.user,
+        });
+
+        return response.data;
+      })
+      .catch(() => {
+        console.log("error");
         dispatch({
           type: "ERROR_MESSAGE",
-          errorMessage: "",
+          errorMessage: "Wrong  login/password combination",
         });
-      }, 3000);
-    });
-};
+      });
+  };
 
 export const order = (orderPizzas, history) => (dispatch) => {
-  axios.defaults.headers.common["Authorization"] = authHeader();
-  axios
-    .post("https://pizza-dummy.herokuapp.com/place_order/", {
+  axiosInstance.defaults.headers.common["Authorization"] = authHeader();
+  axiosInstance
+    .post("/place_order/", {
       ordered_pizzas: orderPizzas,
     })
     .then(() => {
@@ -98,22 +90,11 @@ export const order = (orderPizzas, history) => (dispatch) => {
         type: "SUCCESS_MESSAGE",
         successMessage: "Your order has been successfully completed",
       });
-      setTimeout(() => {
-        dispatch({ type: "DELETE_ALL" });
-        dispatch({ type: "RESET_DATA" });
-        history.push("/");
-      }, 3000);
     })
     .catch(() => {
       dispatch({
         type: "ERROR_MESSAGE",
         errorMessage: "Your order isn't executed",
       });
-      setTimeout(() => {
-        dispatch({
-          type: "ERROR_MESSAGE",
-          errorMessage: "",
-        });
-      }, 3000);
     });
 };

@@ -12,12 +12,12 @@ import PizzasList from "../PizzasList";
 import { UserOutlined } from "@ant-design/icons";
 const { SubMenu } = Menu;
 const AllPizzas = () => {
-  const pizUser = JSON.parse(localStorage.getItem("pizUser"));
   const pizzas = useSelector((state) => state.pizzasListState.pizzas);
   const orderedCount = useSelector((state) => state.pizzasListState.orderedCount);
-  const newState = useSelector((state) => state.registerState);
 
   const orderedPrcie = useSelector((state) => state.pizzasListState.orderedPrcie);
+  const isLoggedIn = useSelector((state) => state.registerState.isLoggedIn);
+  const user = useSelector((state) => state.registerState.user);
   const dispatch = useDispatch();
 
   const logout = () => {
@@ -30,19 +30,18 @@ const AllPizzas = () => {
   return (
     <>
       <div>
-        {pizUser ? (
+        {isLoggedIn ? (
           <div style={styles.User}>
             <Menu mode="inline">
               <SubMenu
-                key="sub1"
                 title={
                   <span>
                     <UserOutlined />
-                    {" " + pizUser.user.firstName}
+                    {" " + user.firstName}
                   </span>
                 }
               >
-                <Menu.ItemGroup key="g1" title={pizUser.user.email}>
+                <Menu.ItemGroup key="g1" title={user.email}>
                   <Menu.Item key="1" onClick={logout}>
                     LogOut
                   </Menu.Item>

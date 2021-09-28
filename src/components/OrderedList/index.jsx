@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { ShoppingCartOutlined, LeftOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { styles } from "../../styles";
@@ -17,10 +18,8 @@ const OrderedList = () => {
   const ordered = useSelector((state) => state.pizzasListState.ordered);
   const orderedCount = useSelector((state) => state.pizzasListState.orderedCount);
   const orderedPrcie = useSelector((state) => state.pizzasListState.orderedPrcie);
-  const state = useSelector((state) => state.registerState);
-  const newState = useSelector((state) => state.pizzasListState);
-  console.log("newState", newState);
-  console.log("state", state);
+  const successMessage = useSelector((state) => state.registerState.successMessage);
+  const errorMessage = useSelector((state) => state.registerState.errorMessage);
 
   const dispatch = useDispatch();
 
@@ -53,8 +52,18 @@ const OrderedList = () => {
     dispatch({ type: "DELETE_ALL" });
   };
 
-  const success = state.successMessage;
-  const error = state.errorMessage;
+  useEffect(() => {
+    if (successMessage !== "") {
+      setTimeout(() => {
+        dispatch({ type: "DELETE_ALL" });
+        dispatch({ type: "RESET_DATA" });
+        history.push("/");
+      }, 3000);
+    }
+  }, [dispatch, history, successMessage]);
+
+  const success = successMessage;
+  const error = errorMessage;
 
   return (
     <div>
@@ -97,7 +106,7 @@ const OrderedList = () => {
 
         <hr style={styles.HrOrderedList} />
 
-        {state.errorMessage && (
+        {errorMessage && (
           <div style={styles.ErrorMessage}>
             <span>
               <FontAwesomeIcon style={styles.Check} icon={faWindowClose} />
@@ -105,7 +114,7 @@ const OrderedList = () => {
             <span style={styles.Span}>{error}</span>
           </div>
         )}
-        {state.successMessage && (
+        {successMessage && (
           <div style={styles.SuccessMessage}>
             <span>
               <FontAwesomeIcon style={styles.Check} icon={faCheck} />

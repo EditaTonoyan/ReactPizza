@@ -6,15 +6,23 @@ const initialState = {
   successMessage: "",
   errorMessage: "",
   isLoggedIn: false,
+  user: {},
 };
 const pizzasListReduser = (state = initialState, action) => {
   switch (action.type) {
-    //այստեղ setState եմ անում
     case "ONCHANGE": {
       const { name, value } = action;
       return {
         ...state,
         [name]: value,
+      };
+    }
+
+    case "SET_USER": {
+      return {
+        ...state,
+        user: action.user,
+        isLoggedIn: true,
       };
     }
 
@@ -28,12 +36,13 @@ const pizzasListReduser = (state = initialState, action) => {
     case "SUCCESS_MESSAGE": {
       return {
         ...state,
+        errorMessage: "",
         successMessage: action.successMessage,
       };
     }
 
     case "LOGOUT": {
-      localStorage.removeItem("pizUser");
+      localStorage.removeItem("accessToken");
       return {
         ...initialState,
       };
@@ -41,7 +50,8 @@ const pizzasListReduser = (state = initialState, action) => {
     case "IS_LOGGED_IN": {
       return {
         ...state,
-        isLoggedIn: action.isLoggedIn,
+        user: action.user,
+        isLoggedIn: true,
       };
     }
     case "RESET_DATA": {

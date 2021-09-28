@@ -1,7 +1,7 @@
 export default function authHeader() {
-  const pizUser = JSON.parse(localStorage.getItem("pizUser"));
-  if (pizUser && pizUser.accessToken) {
-    return "Bearer " + pizUser.accessToken;
+  const token = localStorage.getItem("accessToken");
+  if (token) {
+    return "Bearer " + token;
   } else {
     return "";
   }

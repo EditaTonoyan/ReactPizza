@@ -1,5 +1,4 @@
-import React from "react";
-// import "antd/dist/antd.css";
+import React, { useEffect } from "react";
 import { Form, Input, Button, Checkbox } from "antd";
 import { faCheck, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,10 +11,9 @@ import { useHistory } from "react-router-dom";
 
 const JoinUs = () => {
   let history = useHistory();
-  //registerState-ից default արժեքները գալիս են
-  const { firstName, lastName, email, password, successMessage, errorMessage } = useSelector(
-    (state) => state.registerState
-  );
+  const { successMessage, errorMessage } = useSelector((state) => state.registerState);
+
+  console.log("successMessage", successMessage);
 
   const dispatch = useDispatch();
 
@@ -23,11 +21,19 @@ const JoinUs = () => {
     dispatch({ type: "ONCHANGE", name, value });
   };
 
-  const handleRegister = () => {
-    if (firstName && lastName && email && password) {
-      dispatch(register(firstName, lastName, email, password, history));
-    }
+  const handleRegister = (values) => {
+    dispatch(register({ ...values, history }));
   };
+
+  useEffect(() => {
+    if (successMessage !== "") {
+      setTimeout(() => {
+        dispatch({ type: "SUCCESS_MESSAGE", successMessage: "" });
+        history.push("/login");
+      }, 2000);
+    }
+  }, [successMessage, history, dispatch]);
+
   const error = errorMessage;
   const success = successMessage;
   return (
@@ -73,6 +79,8 @@ const JoinUs = () => {
         initialValues={{
           remember: true,
         }}
+        onFinish={handleRegister}
+        onFieldsChange={([{ name = [], value }]) => onChange(name[0], value)}
       >
         {errorMessage && (
           <div style={styles.ErrorMessage}>
@@ -103,12 +111,11 @@ const JoinUs = () => {
         >
           <Input
             placeholder="firstName"
-            value={firstName} //սկզբից input-ում երևալու է state-ից եկած default արժեքը(դատարկ string)
-            onChange={(e) => onChange("firstName", e.target.value)}
+            // value={firstName} //սկզբից input-ում երևալու է state-ից եկած default արժեքը(դատարկ string)
+            // onChange={(e) => onChange("firstName", e.target.value)}
             //onChange-ի ժամանակ որպես արգումենտ ուղարկում եմ name("firstname"),value-ն(input -ի մեջ գրվածը`e.target.value),
             //եթե e.target.value-ի փոխարեն նորից դնում եմ registerState-ի firstName-ը, ստացվում ա, որ որպես արգումենտ
             //էլի ուղարկում եմ դատարկ string, (//onChange={() => onChange("firstName",firstName)})
-          />
           />
         </Form.Item>
 
@@ -122,11 +129,7 @@ const JoinUs = () => {
             },
           ]}
         >
-          <Input
-            placeholder="lastName"
-            value={lastName}
-            onChange={(e) => onChange("lastName", e.target.value)}
-          />
+          <Input placeholder="lastName" />
         </Form.Item>
 
         <Form.Item
@@ -139,11 +142,7 @@ const JoinUs = () => {
             },
           ]}
         >
-          <Input
-            placeholder="email"
-            value={email}
-            onChange={(e) => onChange("email", e.target.value)}
-          />
+          <Input placeholder="email" />
         </Form.Item>
 
         <Form.Item
@@ -156,11 +155,7 @@ const JoinUs = () => {
             },
           ]}
         >
-          <Input.Password
-            placeholder="password"
-            value={password}
-            onChange={(e) => onChange("password", e.target.value)}
-          />
+          <Input.Password placeholder="password" />
         </Form.Item>
 
         <Form.Item
@@ -180,7 +175,7 @@ const JoinUs = () => {
             span: 16,
           }}
         >
-          <Button onClick={handleRegister} type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit">
             Submit
           </Button>
         </Form.Item>
